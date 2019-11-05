@@ -1,5 +1,5 @@
 # BuildingInfo
-
+[![Build Status](https://travis-ci.org/drolewski/BuildingInfo.svg?branch=master)](https://travis-ci.org/drolewski/BuildingInfo)
 
 # Authors
 [Dominik Mistera](https://github.com/DMistera)
