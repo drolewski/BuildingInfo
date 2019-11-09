@@ -1,4 +1,6 @@
-language: Java
+language:
+  - Java
+  - node_js
 
 before_script:
   - npm install -g @angular/cli
