@@ -1,4 +1,6 @@
 language: Java
 
-before_script:
-  - npm install -g @angular/cli
+jdk:
+  - oraclejdk11
+node_js: "0.10"
+install: "npm install"
