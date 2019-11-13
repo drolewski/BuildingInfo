@@ -64,5 +64,11 @@ public class Controller {
 //
 //    }
 
+//    @PutMapping("/room/{id}")
+//    Room replaceRoom(@RequestBody Room newRoom, @PathVariable Long id) {
+//
+//    }
+
+
 
 }
