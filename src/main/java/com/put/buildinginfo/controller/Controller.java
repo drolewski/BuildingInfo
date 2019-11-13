@@ -69,6 +69,10 @@ public class Controller {
 //
 //    }
 
+//    @PutMapping("/level/{id}")
+//    Level replaceLevel(@RequestBody Level newLevel, @PathVariable Long id) {
+//
+//    }
 
 
 }
