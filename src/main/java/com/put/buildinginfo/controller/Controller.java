@@ -44,6 +44,9 @@ public class Controller {
 //
 //    }
 
-
+//    @GetMapping("/building/{id}")
+//    Level getOneBuilding(@PathVariable Long id) {
+//
+//    }
 
 }
