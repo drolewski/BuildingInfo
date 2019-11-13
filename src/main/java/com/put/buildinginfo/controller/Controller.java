@@ -74,5 +74,9 @@ public class Controller {
 //
 //    }
 
+//    @PutMapping("/building/{id}")
+//    Building replaceBuilding(@RequestBody Building newBuilding, @PathVariable Long id) {
+//
+//    }
 
 }
