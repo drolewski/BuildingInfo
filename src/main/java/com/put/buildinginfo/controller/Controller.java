@@ -24,5 +24,10 @@ public class Controller {
 //
 //    }
 
+//    @GetMapping("/room/{id}")
+//    Room getOneRoom(@PathVariable Long id) {
+//
+//    }
+
 
 }
