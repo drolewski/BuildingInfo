@@ -49,4 +49,9 @@ public class Controller {
 //
 //    }
 
+//    @PostMapping("/room")
+//    Room newRoom(@RequestBody Room newRoom) {
+//
+//    }
+
 }
