@@ -39,6 +39,10 @@ public class Controller {
 //
 //    }
 
+//    @GetMapping("/building")
+//    List<Buildings> getAllBuildings() {
+//
+//    }
 
 
 
