@@ -79,4 +79,9 @@ public class Controller {
 //
 //    }
 
+    @DeleteMapping("/room/{id}")
+    void deleteRoom(@PathVariable Long id) {
+
+    }
+
 }
