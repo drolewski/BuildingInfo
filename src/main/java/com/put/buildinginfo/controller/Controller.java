@@ -59,4 +59,10 @@ public class Controller {
 //
 //    }
 
+//    @PostMapping("/building")
+//    Building newBuilding(@RequestBody Building newBuilding) {
+//
+//    }
+
+
 }
