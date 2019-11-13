@@ -20,7 +20,7 @@ public class Controller {
     }
 
 //    @GetMapping("/room")
-//    List<Room> getAllRoom() {
+//    List<Room> getAllRooms() {
 //
 //    }
 
@@ -30,7 +30,7 @@ public class Controller {
 //    }
 
 //    @GetMapping("/level")
-//    List<Level> getAllLevel() {
+//    List<Level> getAllLevels() {
 //
 //    }
 
@@ -38,6 +38,8 @@ public class Controller {
 //    Level getOneLevel(@PathVariable Long id) {
 //
 //    }
+
+
 
 
 }
