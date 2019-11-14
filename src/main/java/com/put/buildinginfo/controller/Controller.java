@@ -89,4 +89,9 @@ public class Controller {
 
     }
 
+    @DeleteMapping("/building/{id}")
+    void deleteBuilding(@PathVariable Long id) {
+
+    }
+
 }
