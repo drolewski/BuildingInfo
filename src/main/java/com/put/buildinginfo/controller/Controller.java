@@ -84,4 +84,9 @@ public class Controller {
 
     }
 
+    @DeleteMapping("/level/{id}")
+    void deleteLevel(@PathVariable Long id) {
+
+    }
+
 }
