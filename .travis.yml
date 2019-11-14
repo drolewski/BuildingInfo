@@ -3,6 +3,9 @@ language:
   - node_js
 
 before_script:
+  - sudo npm cache clean -f
+  - sudo npm install -g n
+  - sudo n stable
   - npm install -g @angular/cli
 
 jdk:
