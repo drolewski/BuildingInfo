@@ -1,4 +1,4 @@
-package com.put.buildinginfo;
+package applicationArchitecture;
 
 public class Room extends Imoveables{
     private float surface;

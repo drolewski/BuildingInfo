@@ -1,4 +1,4 @@
-package com.put.buildinginfo;
+package applicationArchitecture;
 
 public class Service {
     private Buildings buildings;

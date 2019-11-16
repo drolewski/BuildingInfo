@@ -1,4 +1,4 @@
-package com.put.buildinginfo;
+package applicationArchitecture;
 
 import java.util.Map;
 

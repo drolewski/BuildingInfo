@@ -1,4 +1,4 @@
-package com.put.buildinginfo;
+package applicationArchitecture;
 
 public abstract class Imoveables {
     protected int id;
