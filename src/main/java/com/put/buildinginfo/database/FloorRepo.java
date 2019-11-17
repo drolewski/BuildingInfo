@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface FloorRepo extends MongoRepository<FloorDb, Integer> {
 
     FloorDb findFirstByOrderByFloorIdDesc();
+    FloorDb findById(int id);
 }

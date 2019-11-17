@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface RoomRepo extends MongoRepository<RoomDb, Integer> {
 
     RoomDb findFirstByOrderByRoomIdDesc();
+    RoomDb findByRoomId(int id);
 }
