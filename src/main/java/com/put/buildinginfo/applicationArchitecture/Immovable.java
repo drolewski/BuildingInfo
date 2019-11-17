@@ -1,13 +1,21 @@
-package applicationArchitecture;
+package com.put.buildinginfo.applicationArchitecture;
 
-public abstract class Imoveables {
-    protected int id;
-    protected  String name;
+public abstract class Immovable {
+    private int id;
+    private  String name;
 
     public abstract float calculateCubature();
     public abstract float calculateSurface();
     public abstract float calculateLighting();
     public abstract float calculateHeating();
+
+    public Immovable() {
+    }
+
+    public Immovable(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId(){
         return  id;
