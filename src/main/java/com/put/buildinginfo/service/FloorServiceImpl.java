@@ -41,8 +41,67 @@ public class FloorServiceImpl implements  FloorService{
             RoomDb roomTmp = roomService.saveNewRoom(r);
             roomdbs.add(roomTmp);
         }
-        FloorDb floorDb = new FloorDb(level.getId(), level.getName(), roomdbs);
+        FloorDb floorDb = new FloorDb((floorRepo.findFirstByOrderByFloorIdDesc().getFloorId() + 1), level.getName(), roomdbs);
         floorRepo.save(floorDb);
         return floorDb;
+    }
+
+    @Override
+    public Level refactorFloorDbToLevel(int id) {
+        FloorDb floorDb = floorRepo.findById(id);
+        ArrayList<Room> rooms = new ArrayList<>();
+        for(RoomDb roomdb : floorDb.getRooms()){
+            Room room = roomService.refactorRoomDbToRoom(roomdb.getRoomId());
+            rooms.add(room);
+        }
+        Level refLevel = new Level(floorDb.getFloorId(), floorDb.getName(), rooms);
+        return refLevel;
+    }
+
+    @Override
+    public float calculateSurface(int id) {
+        if(floorRepo.findById(id) != null) {
+            Level level = refactorFloorDbToLevel(id);
+            return level.calculateSurface();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateCubature(int id) {
+        if(floorRepo.findById(id) != null) {
+            Level level = refactorFloorDbToLevel(id);
+            return level.calculateCubature();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateHeating(int id) {
+        if (floorRepo.findById(id) != null) {
+            Level level = refactorFloorDbToLevel(id);
+            return level.calculateHeating();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateLighting(int id) {
+        if (floorRepo.findById(id) != null) {
+            Level level = refactorFloorDbToLevel(id);
+            return level.calculateLighting();
+        }
+        return -1f;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        FloorDb floorDb = floorRepo.findById(id);
+        if(floorDb != null){
+            for(RoomDb roomDb : floorDb.getRooms()){
+                roomService.deleteById(roomDb.getRoomId());
+            }
+            floorRepo.deleteById(id);
+        }
     }
 }

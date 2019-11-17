@@ -10,4 +10,10 @@ public interface FloorService {
     List<FloorDb> getAllFloors();
     FloorDb getFloorById(int id);
     FloorDb saveNewFloor(Level level);
+    Level refactorFloorDbToLevel(int id);
+    float calculateSurface(int id);
+    float calculateCubature(int id);
+    float calculateHeating(int id);
+    float calculateLighting(int id);
+    void deleteById(int id);
 }
