@@ -10,4 +10,10 @@ public interface RoomService {
     List<RoomDb> getAllRooms();
     RoomDb getRoomById(int id);
     RoomDb saveNewRoom(Room room);
+    Room refactorRoomDbToRoom(int id);
+    void deleteById(int id);
+    float getSurface(int id);
+    float getCubature(int id);
+    float getHeating(int id);
+    float getLighing(int id);
 }
