@@ -45,9 +45,68 @@ public class BuildingServiceImpl implements  BuildingService{
             FloorDb floor = floorService.saveNewFloor(o);
             floorDbs.add(floor);
         }
-        BuildingDb buildingDb = new BuildingDb(building.getId(), building.getName(), floorDbs);
+        BuildingDb buildingDb = new BuildingDb((buildingRepo.findFirstByOrderByBuildingIdDesc().getBuildingId() + 1),
+                                                building.getName(), floorDbs);
         buildingRepo.save(buildingDb);
         return buildingDb;
     }
 
+    @Override
+    public Building refactorBuildingDbToBuilding(int id){
+        BuildingDb buildingDb = buildingRepo.findById(id);
+        ArrayList<Level> levels = new ArrayList<>();
+        for(FloorDb floorDb : buildingDb.getFloors()){
+            Level level = floorService.refactorFloorDbToLevel(floorDb.getFloorId());
+            levels.add(level);
+        }
+        Building building = new Building(buildingDb.getBuildingId(), buildingDb.getName(), levels);
+        return building;
+    }
+
+    @Override
+    public float calculateSurface(int id) {
+        if(buildingRepo.findById(id)!= null) {
+            Building building = refactorBuildingDbToBuilding(id);
+            return building.calculateSurface();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateCubature(int id) {
+        if(buildingRepo.findById(id) != null) {
+            Building building = refactorBuildingDbToBuilding(id);
+            return building.calculateCubature();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateHeating(int id) {
+        if(buildingRepo.findById(id) != null) {
+            Building building = refactorBuildingDbToBuilding(id);
+            return building.calculateHeating();
+        }
+        return -1f;
+    }
+
+    @Override
+    public float calculateLighting(int id) {
+        if (buildingRepo.findById(id) != null) {
+            Building building = refactorBuildingDbToBuilding(id);
+            return building.calculateLighting();
+        }
+        return -1f;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        BuildingDb buildingDb = buildingRepo.findById(id);
+        if(buildingDb != null){
+            for(FloorDb floorDb : buildingDb.getFloors()){
+                floorService.deleteById(floorDb.getFloorId());
+            }
+            buildingRepo.deleteById(id);
+        }
+    }
 }

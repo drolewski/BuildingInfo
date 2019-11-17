@@ -10,4 +10,10 @@ public interface BuildingService {
     List<BuildingDb> getAllBuildings();
     BuildingDb getBuildingById(int id);
     BuildingDb saveNewBuilding(Building building);
+    Building refactorBuildingDbToBuilding(int id);
+    float calculateSurface(int id);
+    float calculateCubature(int id);
+    float calculateHeating(int id);
+    float calculateLighting(int id);
+    void deleteById(int id);
 }
