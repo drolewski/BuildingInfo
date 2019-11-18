@@ -107,7 +107,7 @@ public class FloorServiceImpl implements  FloorService{
             for(Integer i : floorDb.getRooms()){
                 roomService.deleteById(i);
             }
-            floorRepo.deleteById(id);
+            floorRepo.deleteByFloorId(id);
         }
     }
 

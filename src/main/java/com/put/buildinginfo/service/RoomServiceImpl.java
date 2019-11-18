@@ -56,7 +56,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void deleteById(int id) {
         if(roomRepo.findByRoomId(id) != null){
-            roomRepo.deleteById(id);
+            roomRepo.deleteByRoomId(id);
         }
     }
 

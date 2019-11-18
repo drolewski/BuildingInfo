@@ -11,4 +11,5 @@ public interface FloorRepo extends MongoRepository<FloorDb, Integer> {
     FloorDb findFirstByOrderByFloorIdDesc();
     FloorDb findById(int id);
     ArrayList<FloorDb> findAll();
+    void deleteByFloorId(int id);
 }

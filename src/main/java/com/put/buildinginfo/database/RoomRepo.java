@@ -11,4 +11,5 @@ public interface RoomRepo extends MongoRepository<RoomDb, Integer> {
     RoomDb findFirstByOrderByRoomIdDesc();
     RoomDb findByRoomId(int id);
     ArrayList<RoomDb> findAll();
+    void deleteByRoomId(int id);
 }

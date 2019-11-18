@@ -11,4 +11,5 @@ public interface BuildingRepo extends MongoRepository<BuildingDb, Integer> {
     BuildingDb findFirstByOrderByBuildingIdDesc();
     BuildingDb findById(int id);
     ArrayList<BuildingDb> findAll();
+    void deleteByBuildingId(int id);
 }

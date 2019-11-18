@@ -42,7 +42,7 @@ public class BuildingServiceImpl implements  BuildingService{
         return refactorBuildingDbToBuilding(buildingRepo.findById(id).getBuildingId());
     }
 
-    public BuildingDb saveNewBuilding(Building building){
+    public Building saveNewBuilding(Building building){
         logger.info("Save new building in db");
         ArrayList<Integer> floorDbs = new ArrayList<>();
         for(Level o : building.getImmoveables()){
@@ -52,7 +52,7 @@ public class BuildingServiceImpl implements  BuildingService{
         BuildingDb buildingDb = new BuildingDb((buildingRepo.findFirstByOrderByBuildingIdDesc().getBuildingId() + 1),
                                                 building.getName(), floorDbs);
         buildingRepo.save(buildingDb);
-        return buildingDb;
+        return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
     }
 
     @Override
@@ -110,12 +110,12 @@ public class BuildingServiceImpl implements  BuildingService{
             for(Integer i : buildingDb.getFloors()){
                 floorService.deleteById(i);
             }
-            buildingRepo.deleteById(id);
+            buildingRepo.deleteByBuildingId(id);
         }
     }
 
     @Override
-    public BuildingDb updateBuilding(Building building) {
+    public Building updateBuilding(Building building) {
         BuildingDb  buildingDb = buildingRepo.findById(building.getId());
         if(buildingDb != null){
             buildingDb.setName(building.getName());
@@ -126,7 +126,9 @@ public class BuildingServiceImpl implements  BuildingService{
             }
             buildingDb.setFloors(levelsId);
             buildingRepo.save(buildingDb);
+            return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
         }
-        return buildingDb;
+        return null;
+
     }
 }
