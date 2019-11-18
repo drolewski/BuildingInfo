@@ -5,6 +5,8 @@ import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.database.FloorDb;
 import com.put.buildinginfo.database.FloorRepo;
 import com.put.buildinginfo.database.RoomDb;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 
 @Service
 public class FloorServiceImpl implements  FloorService{
+
+    final Logger logger = LoggerFactory.getLogger(FloorServiceImpl.class);
 
     private final FloorRepo floorRepo;
 
@@ -60,13 +64,25 @@ public class FloorServiceImpl implements  FloorService{
     @Override
     public Level refactorFloorDbToLevel(int id) {
         FloorDb floorDb = floorRepo.findById(id);
-        ArrayList<Room> rooms = new ArrayList<>();
-        for(Integer i : floorDb.getRooms()){
-            Room room = roomService.refactorRoomDbToRoom(i);
-            rooms.add(room);
+        boolean nullable = false;
+        if(floorDb != null) {
+            ArrayList<Room> rooms = new ArrayList<>();
+            for (Integer i : floorDb.getRooms()) {
+                Room room = roomService.refactorRoomDbToRoom(i);
+                if(room != null){
+                    logger.info("Room is null. We have to update list of Rooms.");
+                    rooms.add(room);
+                }else{
+                    nullable = true;
+                }
+            }
+            Level refLevel = new Level(floorDb.getFloorId(), floorDb.getName(), rooms);
+            if(nullable){
+                updateFloor(refLevel);
+            }
+            return refLevel;
         }
-        Level refLevel = new Level(floorDb.getFloorId(), floorDb.getName(), rooms);
-        return refLevel;
+        return null;
     }
 
     @Override

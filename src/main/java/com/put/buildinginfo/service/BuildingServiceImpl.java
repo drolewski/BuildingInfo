@@ -63,11 +63,20 @@ public class BuildingServiceImpl implements  BuildingService{
     public Building refactorBuildingDbToBuilding(int id){
         BuildingDb buildingDb = buildingRepo.findById(id);
         ArrayList<Level> levels = new ArrayList<>();
+        boolean nullable = false;
         for(Integer i : buildingDb.getFloors()){
             Level level = floorService.refactorFloorDbToLevel(i);
-            levels.add(level);
+            if(level !=null){
+                logger.info("Level is null. We have to update list of Levels.");
+                levels.add(level);
+            }else{
+                nullable = true;
+            }
         }
         Building building = new Building(buildingDb.getBuildingId(), buildingDb.getName(), levels);
+        if(nullable){
+            updateBuilding(building);
+        }
         return building;
     }
 

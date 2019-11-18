@@ -52,10 +52,13 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Room refactorRoomDbToRoom(int id) {
         RoomDb roomDb = roomRepo.findByRoomId(id);
-        Room room = new Room(roomDb.getRoomId(), roomDb.getName(),
-                            roomDb.getSurface(), roomDb.getCubature(),
-                            roomDb.getHeating(), roomDb.getLightning());
-        return room;
+        if(roomDb != null) {
+            Room room = new Room(roomDb.getRoomId(), roomDb.getName(),
+                    roomDb.getSurface(), roomDb.getCubature(),
+                    roomDb.getHeating(), roomDb.getLightning());
+            return room;
+        }
+        return null;
     }
 
     @Override
