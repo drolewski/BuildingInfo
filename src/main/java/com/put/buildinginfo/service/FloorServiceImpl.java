@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class FloorServiceImpl implements  FloorService{
@@ -25,7 +24,7 @@ public class FloorServiceImpl implements  FloorService{
     }
 
     @Override
-    public List<FloorDb> getAllFloors() {
+    public ArrayList<FloorDb> getAllFloors() {
         return floorRepo.findAll();
     }
 
@@ -41,6 +40,7 @@ public class FloorServiceImpl implements  FloorService{
             RoomDb roomTmp = roomService.saveNewRoom(r);
             roomdbs.add(roomTmp);
         }
+        //possible to refactor - auto generation of id in frontend
         FloorDb floorDb = new FloorDb((floorRepo.findFirstByOrderByFloorIdDesc().getFloorId() + 1), level.getName(), roomdbs);
         floorRepo.save(floorDb);
         return floorDb;
@@ -103,5 +103,28 @@ public class FloorServiceImpl implements  FloorService{
             }
             floorRepo.deleteById(id);
         }
+    }
+
+    @Override
+    public FloorDb updateFloor(Level level) {
+        FloorDb floorDb = floorRepo.findById(level.getId());
+        if(floorDb != null){
+            floorDb.setName(level.getName());
+            floorDb.setRooms(roomService.updateRooms(level.getImmoveables()));
+            floorRepo.save(floorDb);
+        }
+        return floorDb;
+    }
+
+    @Override
+    public ArrayList<FloorDb> updateFloors(ArrayList<Level> levels) {
+        ArrayList<FloorDb> floorDbs = new ArrayList<>();
+        for(Level level : levels){
+            FloorDb floorDb = updateFloor(level);
+            if(floorDb != null){
+                floorDbs.add(floorDb);
+            }
+        }
+        return floorDbs;
     }
 }

@@ -3,11 +3,11 @@ package com.put.buildinginfo.service;
 import com.put.buildinginfo.applicationArchitecture.Level;
 import com.put.buildinginfo.database.FloorDb;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FloorService {
 
-    List<FloorDb> getAllFloors();
+    ArrayList<FloorDb> getAllFloors();
     FloorDb getFloorById(int id);
     FloorDb saveNewFloor(Level level);
     Level refactorFloorDbToLevel(int id);
@@ -16,4 +16,6 @@ public interface FloorService {
     float calculateHeating(int id);
     float calculateLighting(int id);
     void deleteById(int id);
+    FloorDb updateFloor(Level level);
+    ArrayList<FloorDb> updateFloors(ArrayList<Level> levels);
 }
