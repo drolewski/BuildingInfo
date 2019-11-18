@@ -47,7 +47,12 @@ public class FloorServiceImpl implements  FloorService{
             roomdbs.add(roomTmp.getRoomId());
         }
         //possible to refactor - auto generation of id in frontend
-        FloorDb floorDb = new FloorDb((floorRepo.findFirstByOrderByFloorIdDesc().getFloorId() + 1), level.getName(), roomdbs);
+        int id = 1;
+        FloorDb floorDbId = floorRepo.findFirstByOrderByFloorIdDesc();
+        if(floorDbId != null){
+            id = floorDbId.getFloorId() + 1;
+        }
+        FloorDb floorDb = new FloorDb(id , level.getName(), roomdbs);
         floorRepo.save(floorDb);
         return floorDb;
     }
@@ -137,5 +142,10 @@ public class FloorServiceImpl implements  FloorService{
             }
         }
         return floorDbs;
+    }
+
+    @Override
+    public void deleteAll() {
+        floorRepo.deleteAll();
     }
 }

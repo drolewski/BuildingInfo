@@ -18,4 +18,5 @@ public interface RoomService {
     float getLighing(int id);
     RoomDb updateRoom(Room room);
     ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms);
+    void deleteAll();
 }

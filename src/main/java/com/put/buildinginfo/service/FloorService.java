@@ -18,4 +18,5 @@ public interface FloorService {
     void deleteById(int id);
     FloorDb updateFloor(Level level);
     ArrayList<FloorDb> updateFloors(ArrayList<Level> levels);
+    void deleteAll();
 }

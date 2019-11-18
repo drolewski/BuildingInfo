@@ -16,4 +16,5 @@ public interface BuildingService {
     float calculateLighting(int id);
     void deleteById(int id);
     Building updateBuilding(Building building);
+    void deleteAll();
 }

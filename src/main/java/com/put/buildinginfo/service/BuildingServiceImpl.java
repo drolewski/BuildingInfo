@@ -49,8 +49,12 @@ public class BuildingServiceImpl implements  BuildingService{
             Integer id = floorService.saveNewFloor(o).getFloorId();
             floorDbs.add(id);
         }
-        BuildingDb buildingDb = new BuildingDb((buildingRepo.findFirstByOrderByBuildingIdDesc().getBuildingId() + 1),
-                                                building.getName(), floorDbs);
+        int id = 1;
+        BuildingDb buildingDbId = buildingRepo.findFirstByOrderByBuildingIdDesc();
+        if(buildingDbId != null){
+            id = buildingDbId.getBuildingId() + 1;
+        }
+        BuildingDb buildingDb = new BuildingDb(id, building.getName(), floorDbs);
         buildingRepo.save(buildingDb);
         return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
     }
@@ -129,6 +133,10 @@ public class BuildingServiceImpl implements  BuildingService{
             return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
         }
         return null;
+    }
 
+    @Override
+    public void deleteAll() {
+        buildingRepo.deleteAll();
     }
 }

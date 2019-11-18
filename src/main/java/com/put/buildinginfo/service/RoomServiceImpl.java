@@ -38,7 +38,12 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDb saveNewRoom(Room room) {
         //possible to refactor - auto generation of id in frontend
-        RoomDb roomDb = new RoomDb((roomRepo.findFirstByOrderByRoomIdDesc().getRoomId() + 1), room.getName(), room.getSurface(),
+        int id = 1;
+        RoomDb roomDbId = roomRepo.findFirstByOrderByRoomIdDesc();
+        if(roomDbId != null){
+            id = roomDbId.getRoomId() + 1;
+        }
+        RoomDb roomDb = new RoomDb(id , room.getName(), room.getSurface(),
                                     room.getCubature(), room.getHeating(), room.getLighting());
         roomRepo.save(roomDb);
         return roomDb;
@@ -47,7 +52,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Room refactorRoomDbToRoom(int id) {
         RoomDb roomDb = roomRepo.findByRoomId(id);
-        Room room = new Room(roomDb.getRoomId(),roomDb.getName(),
+        Room room = new Room(roomDb.getRoomId(), roomDb.getName(),
                             roomDb.getSurface(), roomDb.getCubature(),
                             roomDb.getHeating(), roomDb.getLightning());
         return room;
@@ -116,5 +121,10 @@ public class RoomServiceImpl implements RoomService {
             }
         }
         return roomDbs;
+    }
+
+    @Override
+    public void deleteAll() {
+        roomRepo.deleteAll();
     }
 }
