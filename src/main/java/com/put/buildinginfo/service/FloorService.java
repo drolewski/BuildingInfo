@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public interface FloorService {
 
-    ArrayList<FloorDb> getAllFloors();
-    FloorDb getFloorById(int id);
+    ArrayList<Level> getAllFloors();
+    Level getFloorById(int id);
     FloorDb saveNewFloor(Level level);
     Level refactorFloorDbToLevel(int id);
     float calculateSurface(int id);

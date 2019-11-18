@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public interface RoomService {
 
-    ArrayList<RoomDb> getAllRooms();
-    RoomDb getRoomById(int id);
+    ArrayList<Room> getAllRooms();
+    Room getRoomById(int id);
     RoomDb saveNewRoom(Room room);
     Room refactorRoomDbToRoom(int id);
     void deleteById(int id);

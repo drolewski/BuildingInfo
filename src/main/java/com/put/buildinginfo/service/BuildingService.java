@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public interface BuildingService {
 
-    ArrayList<BuildingDb> getAllBuildings();
-    BuildingDb getBuildingById(int id);
+    ArrayList<Building> getAllBuildings();
+    Building getBuildingById(int id);
     BuildingDb saveNewBuilding(Building building);
     Building refactorBuildingDbToBuilding(int id);
     float calculateSurface(int id);

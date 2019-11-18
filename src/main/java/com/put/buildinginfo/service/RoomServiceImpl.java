@@ -21,13 +21,18 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public ArrayList<RoomDb> getAllRooms() {
-        return roomRepo.findAll();
+    public ArrayList<Room> getAllRooms() {
+        ArrayList<RoomDb> roomDbs = roomRepo.findAll();
+        ArrayList<Room> rooms = new ArrayList<>();
+        for(RoomDb r : roomDbs){
+            rooms.add(refactorRoomDbToRoom(r.getRoomId()));
+        }
+        return rooms;
     }
 
     @Override
-    public RoomDb getRoomById(int id) {
-        return roomRepo.findByRoomId(id);
+    public Room getRoomById(int id) {
+        return refactorRoomDbToRoom(roomRepo.findByRoomId(id).getRoomId());
     }
 
     @Override

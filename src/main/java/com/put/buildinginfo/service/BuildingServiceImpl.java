@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-//TODO Implementacja Delete w dwie strony
-//TODO implementacja dociagania danych z bazy
-//TODO zwracanie spójnych obiektów LEVEL/BUILDING/ROOM
+
 @Service
 public class BuildingServiceImpl implements  BuildingService{
 
@@ -29,14 +27,19 @@ public class BuildingServiceImpl implements  BuildingService{
         this.floorService = floorService;
     }
 
-    //returns all informations about buildings stored in db
-    public ArrayList<BuildingDb> getAllBuildings(){
-        return buildingRepo.findAll();
+    public ArrayList<Building> getAllBuildings(){
+        ArrayList<BuildingDb> buildingDbs = buildingRepo.findAll();
+        ArrayList<Building> buildings = new ArrayList<>();
+        for(BuildingDb buildingDb : buildingDbs){
+            Building building = refactorBuildingDbToBuilding(buildingDb.getBuildingId());
+            buildings.add(building);
+        }
+        return buildings;
     }
 
-    //returns one building by id
-    public BuildingDb getBuildingById(int id){
-        return buildingRepo.findById(id);
+
+    public Building getBuildingById(int id){
+        return refactorBuildingDbToBuilding(buildingRepo.findById(id).getBuildingId());
     }
 
     public BuildingDb saveNewBuilding(Building building){

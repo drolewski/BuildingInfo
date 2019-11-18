@@ -24,13 +24,19 @@ public class FloorServiceImpl implements  FloorService{
     }
 
     @Override
-    public ArrayList<FloorDb> getAllFloors() {
-        return floorRepo.findAll();
+    public ArrayList<Level> getAllFloors() {
+        ArrayList<FloorDb> floordbs = floorRepo.findAll();
+        ArrayList<Level> levels = new ArrayList<>();
+        for(FloorDb floorDb : floordbs){
+            Level level = refactorFloorDbToLevel(floorDb.getFloorId());
+            levels.add(level);
+        }
+        return levels;
     }
 
     @Override
-    public FloorDb getFloorById(int id) {
-        return floorRepo.findById(id);
+    public Level getFloorById(int id) {
+        return refactorFloorDbToLevel(floorRepo.findById(id).getFloorId());
     }
 
     @Override
