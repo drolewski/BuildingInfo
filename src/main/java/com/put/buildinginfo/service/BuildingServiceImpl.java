@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
+//TODO Implementacja Delete w dwie strony
+//TODO implementacja dociagania danych z bazy
+//TODO zwracanie spójnych obiektów LEVEL/BUILDING/ROOM
 @Service
 public class BuildingServiceImpl implements  BuildingService{
 
@@ -39,10 +41,10 @@ public class BuildingServiceImpl implements  BuildingService{
 
     public BuildingDb saveNewBuilding(Building building){
         logger.info("Save new building in db");
-        ArrayList<FloorDb> floorDbs = new ArrayList<>();
+        ArrayList<Integer> floorDbs = new ArrayList<>();
         for(Level o : building.getImmoveables()){
-            FloorDb floor = floorService.saveNewFloor(o);
-            floorDbs.add(floor);
+            Integer id = floorService.saveNewFloor(o).getFloorId();
+            floorDbs.add(id);
         }
         BuildingDb buildingDb = new BuildingDb((buildingRepo.findFirstByOrderByBuildingIdDesc().getBuildingId() + 1),
                                                 building.getName(), floorDbs);
@@ -54,8 +56,8 @@ public class BuildingServiceImpl implements  BuildingService{
     public Building refactorBuildingDbToBuilding(int id){
         BuildingDb buildingDb = buildingRepo.findById(id);
         ArrayList<Level> levels = new ArrayList<>();
-        for(FloorDb floorDb : buildingDb.getFloors()){
-            Level level = floorService.refactorFloorDbToLevel(floorDb.getFloorId());
+        for(Integer i : buildingDb.getFloors()){
+            Level level = floorService.refactorFloorDbToLevel(i);
             levels.add(level);
         }
         Building building = new Building(buildingDb.getBuildingId(), buildingDb.getName(), levels);
@@ -102,8 +104,8 @@ public class BuildingServiceImpl implements  BuildingService{
     public void deleteById(int id) {
         BuildingDb buildingDb = buildingRepo.findById(id);
         if(buildingDb != null){
-            for(FloorDb floorDb : buildingDb.getFloors()){
-                floorService.deleteById(floorDb.getFloorId());
+            for(Integer i : buildingDb.getFloors()){
+                floorService.deleteById(i);
             }
             buildingRepo.deleteById(id);
         }
@@ -114,7 +116,12 @@ public class BuildingServiceImpl implements  BuildingService{
         BuildingDb  buildingDb = buildingRepo.findById(building.getId());
         if(buildingDb != null){
             buildingDb.setName(building.getName());
-            buildingDb.setFloors(floorService.updateFloors(building.getImmoveables()));
+            ArrayList<FloorDb> updatedFloors = floorService.updateFloors(building.getImmoveables());
+            ArrayList<Integer> levelsId = new ArrayList<>();
+            for(FloorDb floorDb : updatedFloors){
+                levelsId.add(floorDb.getFloorId());
+            }
+            buildingDb.setFloors(levelsId);
             buildingRepo.save(buildingDb);
         }
         return buildingDb;
