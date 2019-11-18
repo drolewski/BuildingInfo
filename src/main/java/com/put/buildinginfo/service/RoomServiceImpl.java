@@ -6,6 +6,8 @@ import com.put.buildinginfo.database.RoomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomDb> getAllRooms() {
+    public ArrayList<RoomDb> getAllRooms() {
         return roomRepo.findAll();
     }
 
@@ -30,6 +32,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomDb saveNewRoom(Room room) {
+        //possible to refactor - auto generation of id in frontend
         RoomDb roomDb = new RoomDb((roomRepo.findFirstByOrderByRoomIdDesc().getRoomId() + 1), room.getName(), room.getSurface(),
                                     room.getCubature(), room.getHeating(), room.getLighting());
         roomRepo.save(roomDb);
@@ -82,5 +85,31 @@ public class RoomServiceImpl implements RoomService {
             return roomRepo.findByRoomId(id).getLightning();
         }
         return -1f;
+    }
+
+    @Override
+    public RoomDb updateRoom(Room room) {
+        RoomDb roomDb = roomRepo.findByRoomId(room.getId());
+        if(roomDb != null){
+            roomDb.setName(room.getName());
+            roomDb.setSurface(room.getSurface());
+            roomDb.setCubature(room.getCubature());
+            roomDb.setHeating(room.getHeating());
+            roomDb.setLightning(room.getLighting());
+            roomRepo.save(roomDb);
+        }
+        return roomDb;
+    }
+
+    @Override
+    public ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms) {
+        ArrayList<RoomDb> roomDbs = new ArrayList<>();
+        for(Room room : rooms) {
+            RoomDb roomDb = updateRoom(room);
+            if (roomDb != null) {
+                roomDbs.add(roomDb);
+            }
+        }
+        return roomDbs;
     }
 }

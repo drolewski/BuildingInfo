@@ -3,11 +3,11 @@ package com.put.buildinginfo.service;
 import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.database.RoomDb;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface RoomService {
 
-    List<RoomDb> getAllRooms();
+    ArrayList<RoomDb> getAllRooms();
     RoomDb getRoomById(int id);
     RoomDb saveNewRoom(Room room);
     Room refactorRoomDbToRoom(int id);
@@ -16,4 +16,6 @@ public interface RoomService {
     float getCubature(int id);
     float getHeating(int id);
     float getLighing(int id);
+    RoomDb updateRoom(Room room);
+    ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms);
 }
