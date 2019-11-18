@@ -13,14 +13,14 @@ public class BuildingDb {
 
     private String name;
 
-    private List<FloorDb> floors;
+    private List<Integer> floors;
 
-    public BuildingDb(int buildingId, List<FloorDb> floors) {
+    public BuildingDb(int buildingId, List<Integer> floors) {
         this.buildingId = buildingId;
         this.floors = floors;
     }
 
-    public BuildingDb(int buildingId, String name, List<FloorDb> floors) {
+    public BuildingDb(int buildingId, String name, List<Integer> floors) {
         this.buildingId = buildingId;
         this.name = name;
         this.floors = floors;
@@ -45,11 +45,11 @@ public class BuildingDb {
         this.name = name;
     }
 
-    public List<FloorDb> getFloors() {
+    public List<Integer> getFloors() {
         return floors;
     }
 
-    public void setFloors(List<FloorDb> floors) {
+    public void setFloors(List<Integer> floors) {
         this.floors = floors;
     }
 

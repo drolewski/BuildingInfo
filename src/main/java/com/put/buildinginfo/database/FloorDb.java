@@ -13,15 +13,15 @@ public class FloorDb {
 
     private String name;
 
-    private List<RoomDb> rooms;
+    private List<Integer> rooms;
 
 
-    public FloorDb(int floorId, List<RoomDb> rooms) {
+    public FloorDb(int floorId, List<Integer> rooms) {
         this.floorId = floorId;
         this.rooms = rooms;
     }
 
-    public FloorDb(int floorId, String name, List<RoomDb> rooms) {
+    public FloorDb(int floorId, String name, List<Integer> rooms) {
         this.floorId = floorId;
         this.rooms = rooms;
         this.name = name;
@@ -38,11 +38,11 @@ public class FloorDb {
         this.floorId = floorId;
     }
 
-    public List<RoomDb> getRooms() {
+    public List<Integer> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<RoomDb> rooms) {
+    public void setRooms(List<Integer> rooms) {
         this.rooms = rooms;
     }
 
@@ -62,15 +62,15 @@ public class FloorDb {
         FloorDb floorDb = (FloorDb) o;
 
         if (floorId != floorDb.floorId) return false;
-        if (rooms != null ? !rooms.equals(floorDb.rooms) : floorDb.rooms != null) return false;
-        return name != null ? name.equals(floorDb.name) : floorDb.name == null;
+        if (name != null ? !name.equals(floorDb.name) : floorDb.name != null) return false;
+        return rooms != null ? rooms.equals(floorDb.rooms) : floorDb.rooms == null;
     }
 
     @Override
     public int hashCode() {
         int result = floorId;
-        result = 31 * result + (rooms != null ? rooms.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (rooms != null ? rooms.hashCode() : 0);
         return result;
     }
 }
