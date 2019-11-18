@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class BuildingServiceImpl implements  BuildingService{
@@ -29,7 +28,7 @@ public class BuildingServiceImpl implements  BuildingService{
     }
 
     //returns all informations about buildings stored in db
-    public List<BuildingDb> getAllBuildings(){
+    public ArrayList<BuildingDb> getAllBuildings(){
         return buildingRepo.findAll();
     }
 
@@ -108,5 +107,16 @@ public class BuildingServiceImpl implements  BuildingService{
             }
             buildingRepo.deleteById(id);
         }
+    }
+
+    @Override
+    public BuildingDb updateBuilding(Building building) {
+        BuildingDb  buildingDb = buildingRepo.findById(building.getId());
+        if(buildingDb != null){
+            buildingDb.setName(building.getName());
+            buildingDb.setFloors(floorService.updateFloors(building.getImmoveables()));
+            buildingRepo.save(buildingDb);
+        }
+        return buildingDb;
     }
 }

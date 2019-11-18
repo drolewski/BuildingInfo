@@ -3,11 +3,11 @@ package com.put.buildinginfo.service;
 import com.put.buildinginfo.applicationArchitecture.Building;
 import com.put.buildinginfo.database.BuildingDb;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface BuildingService {
 
-    List<BuildingDb> getAllBuildings();
+    ArrayList<BuildingDb> getAllBuildings();
     BuildingDb getBuildingById(int id);
     BuildingDb saveNewBuilding(Building building);
     Building refactorBuildingDbToBuilding(int id);
@@ -16,4 +16,5 @@ public interface BuildingService {
     float calculateHeating(int id);
     float calculateLighting(int id);
     void deleteById(int id);
+    BuildingDb updateBuilding(Building building);
 }
