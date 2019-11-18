@@ -35,10 +35,10 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public FloorDb saveNewFloor(Level level) {
-        ArrayList<RoomDb> roomdbs = new ArrayList<>();
+        ArrayList<Integer> roomdbs = new ArrayList<>();
         for(Room r : level.getImmoveables()){
             RoomDb roomTmp = roomService.saveNewRoom(r);
-            roomdbs.add(roomTmp);
+            roomdbs.add(roomTmp.getRoomId());
         }
         //possible to refactor - auto generation of id in frontend
         FloorDb floorDb = new FloorDb((floorRepo.findFirstByOrderByFloorIdDesc().getFloorId() + 1), level.getName(), roomdbs);
@@ -50,8 +50,8 @@ public class FloorServiceImpl implements  FloorService{
     public Level refactorFloorDbToLevel(int id) {
         FloorDb floorDb = floorRepo.findById(id);
         ArrayList<Room> rooms = new ArrayList<>();
-        for(RoomDb roomdb : floorDb.getRooms()){
-            Room room = roomService.refactorRoomDbToRoom(roomdb.getRoomId());
+        for(Integer i : floorDb.getRooms()){
+            Room room = roomService.refactorRoomDbToRoom(i);
             rooms.add(room);
         }
         Level refLevel = new Level(floorDb.getFloorId(), floorDb.getName(), rooms);
@@ -98,8 +98,8 @@ public class FloorServiceImpl implements  FloorService{
     public void deleteById(int id) {
         FloorDb floorDb = floorRepo.findById(id);
         if(floorDb != null){
-            for(RoomDb roomDb : floorDb.getRooms()){
-                roomService.deleteById(roomDb.getRoomId());
+            for(Integer i : floorDb.getRooms()){
+                roomService.deleteById(i);
             }
             floorRepo.deleteById(id);
         }
@@ -110,7 +110,12 @@ public class FloorServiceImpl implements  FloorService{
         FloorDb floorDb = floorRepo.findById(level.getId());
         if(floorDb != null){
             floorDb.setName(level.getName());
-            floorDb.setRooms(roomService.updateRooms(level.getImmoveables()));
+            ArrayList<RoomDb> updatedRooms = roomService.updateRooms(level.getImmoveables());
+            ArrayList<Integer> roomsId = new ArrayList<>();
+            for(RoomDb roomDb : updatedRooms){
+                roomsId.add(roomDb.getRoomId());
+            }
+            floorDb.setRooms(roomsId);
             floorRepo.save(floorDb);
         }
         return floorDb;
