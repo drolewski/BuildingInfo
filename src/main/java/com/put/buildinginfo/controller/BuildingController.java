@@ -90,7 +90,7 @@ public class BuildingController {
     }
 
     @PostMapping("")
-    public Building saveNewFloor(@RequestBody Building building) {
+    public Building saveNewBuilding(@RequestBody Building building) {
         logger.info("[POST] - /building");
         return buildingService.saveNewBuilding(building);
     }
