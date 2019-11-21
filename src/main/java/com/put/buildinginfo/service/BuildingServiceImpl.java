@@ -89,6 +89,7 @@ public class BuildingServiceImpl implements  BuildingService{
             Building building = refactorBuildingDbToBuilding(id);
             return building.calculateSurface();
         }
+        logger.info("Cannot calculate surface: "+ id);
         return -1f;
     }
 
@@ -99,6 +100,7 @@ public class BuildingServiceImpl implements  BuildingService{
             Building building = refactorBuildingDbToBuilding(id);
             return building.calculateCubature();
         }
+        logger.info("Cannot calculate cubature: "+ id);
         return -1f;
     }
 
@@ -109,6 +111,7 @@ public class BuildingServiceImpl implements  BuildingService{
             Building building = refactorBuildingDbToBuilding(id);
             return (building.calculateHeating()/building.calculateCubature());
         }
+        logger.info("Cannot calculate heating: "+ id);
         return -1f;
     }
 
@@ -119,6 +122,7 @@ public class BuildingServiceImpl implements  BuildingService{
             Building building = refactorBuildingDbToBuilding(id);
             return (building.calculateLighting()/building.calculateSurface());
         }
+        logger.info("Cannot calculate lighting: "+ id);
         return -1f;
     }
 
