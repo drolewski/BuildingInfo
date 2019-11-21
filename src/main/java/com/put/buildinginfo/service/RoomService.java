@@ -15,7 +15,7 @@ public interface RoomService {
     float getSurface(int id);
     float getCubature(int id);
     float getHeating(int id);
-    float getLighing(int id);
+    float getLighting(int id);
     RoomDb updateRoom(Room room);
     ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms);
     void deleteAll();
