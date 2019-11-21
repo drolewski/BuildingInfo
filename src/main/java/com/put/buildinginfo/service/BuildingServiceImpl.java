@@ -102,7 +102,7 @@ public class BuildingServiceImpl implements  BuildingService{
     public float calculateHeating(int id) {
         if(buildingRepo.findById(id) != null) {
             Building building = refactorBuildingDbToBuilding(id);
-            return building.calculateHeating();
+            return (building.calculateHeating()/building.calculateCubature());
         }
         return -1f;
     }
@@ -111,7 +111,7 @@ public class BuildingServiceImpl implements  BuildingService{
     public float calculateLighting(int id) {
         if (buildingRepo.findById(id) != null) {
             Building building = refactorBuildingDbToBuilding(id);
-            return building.calculateLighting();
+            return (building.calculateLighting()/building.calculateSurface());
         }
         return -1f;
     }

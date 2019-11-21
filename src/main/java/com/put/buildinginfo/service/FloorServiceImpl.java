@@ -107,7 +107,7 @@ public class FloorServiceImpl implements  FloorService{
     public float calculateHeating(int id) {
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
-            return level.calculateHeating();
+            return (level.calculateHeating()/level.calculateHeating());
         }
         return -1f;
     }
@@ -116,7 +116,7 @@ public class FloorServiceImpl implements  FloorService{
     public float calculateLighting(int id) {
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
-            return level.calculateLighting();
+            return (level.calculateLighting()/level.calculateSurface());
         }
         return -1f;
     }

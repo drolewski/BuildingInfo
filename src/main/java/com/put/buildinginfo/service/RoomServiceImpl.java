@@ -87,15 +87,15 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public float getHeating(int id) {
         if(roomRepo.findByRoomId(id) != null){
-            return roomRepo.findByRoomId(id).getHeating();
+            return (roomRepo.findByRoomId(id).getHeating()/roomRepo.findByRoomId(id).getCubature());
         }
         return -1f;
     }
 
     @Override
-    public float getLighing(int id) {
+    public float getLighting(int id) {
         if(roomRepo.findByRoomId(id) != null){
-            return roomRepo.findByRoomId(id).getLightning();
+            return (roomRepo.findByRoomId(id).getLightning()/roomRepo.findByRoomId(id).getSurface());
         }
         return -1f;
     }
