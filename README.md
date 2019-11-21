@@ -49,7 +49,7 @@ Inside this catalog Mongo will create collection files.
 ## Request Body
 * Room:
 
-
+```json
     {    
         "id": 1,
         "name": "test",
@@ -58,10 +58,11 @@ Inside this catalog Mongo will create collection files.
         "heating": 156.0,
         "lighting": 210.0    
     }
+```
     
 * Level:
     
-    
+```json 
     {
         "id": 1,
         "name": "testLvL",
@@ -82,10 +83,11 @@ Inside this catalog Mongo will create collection files.
             "lighting": 100.0 
         }]
     }
+```
     
 * Building:
 
-
+```json
     {
             "id": 1,
             "name": "testBuilding",
@@ -108,9 +110,9 @@ Inside this catalog Mongo will create collection files.
                     "heating": 90.0,
                     "lighting": 100.0 
                 }]
-        }
-    
-    
+            }]
+    }
+```
 
 # Authors
 [Dominik Mistera](https://github.com/DMistera)
