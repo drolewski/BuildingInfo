@@ -1,1 +1,5 @@
 language: Java
+services:
+  - mongodb
+before_script:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
