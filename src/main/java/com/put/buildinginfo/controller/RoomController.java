@@ -1,5 +1,8 @@
 package com.put.buildinginfo.controller;
 
+import com.put.buildinginfo.applicationArchitecture.Room;
+import com.put.buildinginfo.exception.ImmovableNotFound;
+import com.put.buildinginfo.service.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,21 +12,21 @@ import java.util.ArrayList;
 @RequestMapping("room")
 public class RoomController {
     public static final String ROOM_NOT_FOUND = "Room not found: ";
-    private  final RoomServcie roomServcie;
+    private  final RoomServiceImpl roomService;
 
     @Autowired
-    public RoomController(RoomServcie roomServcie) {
-        this.roomServcie = roomServcie;
+    public RoomController(RoomServiceImpl roomServcie) {
+        this.roomService = roomServcie;
     }
 
     @GetMapping("")
     public ArrayList<Room> getAllRooms() {
-        return roomServcie.getAllRooms();
+        return roomService.getAllRooms();
     }
 
     @GetMapping("/{id}")
     public Room getRoomById(@PathVariable int id) {
-        Room roomTmp = roomServcie.getRoomById(id);
+        Room roomTmp = roomService.getRoomById(id);
         if(roomTmp != null) {
             return roomTmp;
         }
@@ -32,7 +35,7 @@ public class RoomController {
 
     @GetMapping("/surface/{id}")
     public float getSurface(@PathVariable int id) {
-        float roomTmp = roomServcie.getSurface(id);
+        float roomTmp = roomService.getSurface(id);
         if(roomTmp != -1f) {
             return roomTmp;
         }
@@ -41,7 +44,7 @@ public class RoomController {
 
     @GetMapping("/cubature/{id}")
     public float getCubature(@PathVariable int id) {
-        float roomTmp = roomServcie.getCubature(id);
+        float roomTmp = roomService.getCubature(id);
         if(roomTmp != -1f) {
             return roomTmp;
         }
@@ -50,7 +53,7 @@ public class RoomController {
 
     @GetMapping("/lighting/{id}")
     public float getLighting(@PathVariable int id) {
-        float roomTmp =  roomServcie.getLighting(id);
+        float roomTmp =  roomService.getLighting(id);
         if(roomTmp != -1f) {
             return roomTmp;
         }
@@ -59,7 +62,7 @@ public class RoomController {
 
     @GetMapping("/heating/{id}")
     public float getHeating(@PathVariable int id) {
-        float roomTmp = roomServcie.getHeating(id);
+        float roomTmp = roomService.getHeating(id);
         if(roomTmp != -1f) {
             return roomTmp;
         }
@@ -72,12 +75,12 @@ public class RoomController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id) {
-        return roomServcie.deleteById(id);
+    public void deleteById(@PathVariable int id)  {
+        roomService.deleteById(id);
     }
 
     @PutMapping("")
     public Room updateRoom(@RequestBody Room room) {
-        return roomServcie.updateRoom(room);
+        return roomService.updateRoom(room);
     }
 }
