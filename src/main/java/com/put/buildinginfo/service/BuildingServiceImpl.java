@@ -69,9 +69,9 @@ public class BuildingServiceImpl implements  BuildingService{
         for(Integer i : buildingDb.getFloors()){
             Level level = floorService.refactorFloorDbToLevel(i);
             if(level !=null){
-                logger.debug("Level is null. We have to update list of Levels.");
                 levels.add(level);
             }else{
+                logger.debug("Level is null. We have to update list of Levels.");
                 nullable = true;
             }
         }

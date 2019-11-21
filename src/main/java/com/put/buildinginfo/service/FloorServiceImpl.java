@@ -75,9 +75,9 @@ public class FloorServiceImpl implements  FloorService{
             for (Integer i : floorDb.getRooms()) {
                 Room room = roomService.refactorRoomDbToRoom(i);
                 if(room != null){
-                    logger.info("Room is null. We have to update list of Rooms.");
                     rooms.add(room);
                 }else{
+                    logger.info("Room is null. We have to update list of Rooms.");
                     nullable = true;
                 }
             }
