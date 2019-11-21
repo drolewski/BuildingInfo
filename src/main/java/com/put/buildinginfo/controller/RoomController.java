@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("room")
 public class RoomController {
-    public static final String ROOM_NOT_FOUND = "Room not found: ";
+    private static final String ROOM_NOT_FOUND = "Room not found: ";
     private  final RoomServiceImpl roomService;
 
     @Autowired
