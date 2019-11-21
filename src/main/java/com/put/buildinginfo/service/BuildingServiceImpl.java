@@ -4,7 +4,6 @@ import com.put.buildinginfo.applicationArchitecture.Building;
 import com.put.buildinginfo.applicationArchitecture.Level;
 import com.put.buildinginfo.database.BuildingDb;
 import com.put.buildinginfo.database.BuildingRepo;
-import com.put.buildinginfo.database.FloorDb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,10 +131,10 @@ public class BuildingServiceImpl implements  BuildingService{
         BuildingDb  buildingDb = buildingRepo.findById(building.getId());
         if(buildingDb != null){
             buildingDb.setName(building.getName());
-            ArrayList<FloorDb> updatedFloors = floorService.updateFloors(building.getImmoveables());
+            ArrayList<Level> updatedFloors = floorService.updateFloors(building.getImmoveables());
             ArrayList<Integer> levelsId = new ArrayList<>();
-            for(FloorDb floorDb : updatedFloors){
-                levelsId.add(floorDb.getFloorId());
+            for(Level level : updatedFloors){
+                levelsId.add(level.getId());
             }
             buildingDb.setFloors(levelsId);
             buildingRepo.save(buildingDb);

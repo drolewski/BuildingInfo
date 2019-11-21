@@ -32,7 +32,11 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Room getRoomById(int id) {
-        return refactorRoomDbToRoom(roomRepo.findByRoomId(id).getRoomId());
+        RoomDb roomDb = roomRepo.findByRoomId(id);
+        if(roomDb != null){
+            return refactorRoomDbToRoom(roomDb.getRoomId());
+        }
+        return null;
     }
 
     @Override
@@ -102,7 +106,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDb updateRoom(Room room) {
+    public Room updateRoom(Room room) {
         RoomDb roomDb = roomRepo.findByRoomId(room.getId());
         if(roomDb != null){
             roomDb.setName(room.getName());
@@ -111,17 +115,18 @@ public class RoomServiceImpl implements RoomService {
             roomDb.setHeating(room.getHeating());
             roomDb.setLightning(room.getLighting());
             roomRepo.save(roomDb);
+            return refactorRoomDbToRoom(roomDb.getRoomId());
         }
-        return roomDb;
+        return null;
     }
 
     @Override
-    public ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms) {
-        ArrayList<RoomDb> roomDbs = new ArrayList<>();
+    public ArrayList<Room> updateRooms(ArrayList<Room> rooms) {
+        ArrayList<Room> roomDbs = new ArrayList<>();
         for(Room room : rooms) {
-            RoomDb roomDb = updateRoom(room);
-            if (roomDb != null) {
-                roomDbs.add(roomDb);
+            Room roomUpdated = updateRoom(room);
+            if (room != null) {
+                roomDbs.add(roomUpdated);
             }
         }
         return roomDbs;

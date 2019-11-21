@@ -4,7 +4,6 @@ import com.put.buildinginfo.applicationArchitecture.Level;
 import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.database.FloorDb;
 import com.put.buildinginfo.database.FloorRepo;
-import com.put.buildinginfo.database.RoomDb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,28 +133,29 @@ public class FloorServiceImpl implements  FloorService{
     }
 
     @Override
-    public FloorDb updateFloor(Level level) {
+    public Level updateFloor(Level level) {
         FloorDb floorDb = floorRepo.findById(level.getId());
         if(floorDb != null){
             floorDb.setName(level.getName());
-            ArrayList<RoomDb> updatedRooms = roomService.updateRooms(level.getImmoveables());
+            ArrayList<Room> updatedRooms = roomService.updateRooms(level.getImmoveables());
             ArrayList<Integer> roomsId = new ArrayList<>();
-            for(RoomDb roomDb : updatedRooms){
-                roomsId.add(roomDb.getRoomId());
+            for(Room roomTemp : updatedRooms){
+                roomsId.add(roomTemp.getId());
             }
             floorDb.setRooms(roomsId);
             floorRepo.save(floorDb);
+            return refactorFloorDbToLevel(floorDb.getFloorId());
         }
-        return floorDb;
+        return null;
     }
 
     @Override
-    public ArrayList<FloorDb> updateFloors(ArrayList<Level> levels) {
-        ArrayList<FloorDb> floorDbs = new ArrayList<>();
+    public ArrayList<Level> updateFloors(ArrayList<Level> levels) {
+        ArrayList<Level> floorDbs = new ArrayList<>();
         for(Level level : levels){
-            FloorDb floorDb = updateFloor(level);
-            if(floorDb != null){
-                floorDbs.add(floorDb);
+            Level levelUpdated = updateFloor(level);
+            if(levelUpdated != null){
+                floorDbs.add(levelUpdated);
             }
         }
         return floorDbs;

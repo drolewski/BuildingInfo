@@ -1,7 +1,6 @@
 package com.put.buildinginfo.service;
 
 import com.put.buildinginfo.applicationArchitecture.Room;
-import com.put.buildinginfo.database.RoomDb;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ public interface RoomService {
     float getCubature(int id);
     float getHeating(int id);
     float getLighting(int id);
-    RoomDb updateRoom(Room room);
-    ArrayList<RoomDb> updateRooms(ArrayList<Room> rooms);
+    Room updateRoom(Room room);
+    ArrayList<Room> updateRooms(ArrayList<Room> rooms);
     void deleteAll();
 }
