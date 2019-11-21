@@ -87,6 +87,7 @@ public class FloorServiceImpl implements  FloorService{
             }
             return refLevel;
         }
+        logger.debug("This level does not exist in db: " + id);
         return null;
     }
 
@@ -97,6 +98,7 @@ public class FloorServiceImpl implements  FloorService{
             Level level = refactorFloorDbToLevel(id);
             return level.calculateSurface();
         }
+        logger.info("Cannot calculate surface: "+ id);
         return -1f;
     }
 
@@ -107,6 +109,7 @@ public class FloorServiceImpl implements  FloorService{
             Level level = refactorFloorDbToLevel(id);
             return level.calculateCubature();
         }
+        logger.info("Cannot calculate cubature: "+ id);
         return -1f;
     }
 
@@ -117,6 +120,7 @@ public class FloorServiceImpl implements  FloorService{
             Level level = refactorFloorDbToLevel(id);
             return (level.calculateHeating()/level.calculateHeating());
         }
+        logger.info("Cannot calculate heating: "+ id);
         return -1f;
     }
 
@@ -127,6 +131,7 @@ public class FloorServiceImpl implements  FloorService{
             Level level = refactorFloorDbToLevel(id);
             return (level.calculateLighting()/level.calculateSurface());
         }
+        logger.info("Cannot calculate lighting: "+ id);
         return -1f;
     }
 
@@ -157,6 +162,7 @@ public class FloorServiceImpl implements  FloorService{
             floorRepo.save(floorDb);
             return refactorFloorDbToLevel(floorDb.getFloorId());
         }
+        logger.debug("Given level does not exist: " + level);
         return null;
     }
 
