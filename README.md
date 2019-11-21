@@ -89,28 +89,28 @@ Inside this catalog Mongo will create collection files.
 
 ```json
     {
+        "id": 1,
+        "name": "testBuilding",
+        "immoveables":[{
             "id": 1,
-            "name": "testBuilding",
-            "immoveables":[{
+            "name": "testLvL",
+            "immoveables": [{
                 "id": 1,
-                "name": "testLvL",
-                "immoveables": [{
-                    "id": 1,
-                    "name": "testRoom",
-                    "surface": 123.0,
-                    "cubature": 400.0,
-                    "heating": 156.0,
-                    "lighting": 210.0   
-                },
-                {
-                    "id": 1,
-                    "name": "testRoom",
-                    "surface": 65.0,
-                    "cubature": 190.0,
-                    "heating": 90.0,
-                    "lighting": 100.0 
-                }]
+                "name": "testRoom",
+                "surface": 123.0,
+                "cubature": 400.0,
+                "heating": 156.0,
+                "lighting": 210.0   
+            },
+            {
+                "id": 1,
+                "name": "testRoom",
+                "surface": 65.0,
+                "cubature": 190.0,
+                "heating": 90.0,
+                "lighting": 100.0 
             }]
+        }]
     }
 ```
 
