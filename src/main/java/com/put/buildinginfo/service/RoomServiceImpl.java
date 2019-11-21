@@ -3,6 +3,7 @@ package com.put.buildinginfo.service;
 import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.database.RoomDb;
 import com.put.buildinginfo.database.RoomRepo;
+import com.put.buildinginfo.exception.ImmovableNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +71,9 @@ public class RoomServiceImpl implements RoomService {
     public void deleteById(int id) {
         if(roomRepo.findByRoomId(id) != null){
             roomRepo.deleteByRoomId(id);
+            return;
         }
+        throw new ImmovableNotFound("Room Not Found: " + id );
     }
 
     @Override
