@@ -118,7 +118,7 @@ public class FloorServiceImpl implements  FloorService{
         logger.debug("Calculate heating of the level: " + id);
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
-            return (level.calculateHeating()/level.calculateHeating());
+            return (level.calculateHeating()/level.calculateCubature());
         }
         logger.info("Cannot calculate heating: "+ id);
         return -1f;

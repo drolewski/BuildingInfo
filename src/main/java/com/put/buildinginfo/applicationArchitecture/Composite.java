@@ -38,15 +38,31 @@ public class Composite<T extends Immovable> extends Immovable{
     }
 
     public float calculateSurface(){
-        return Float.parseFloat(null);
+        float surfaceSum = 0f;
+        for(T o : immoveables){
+            surfaceSum += o.calculateSurface();
+        }
+        return surfaceSum;
     }
     public float calculateCubature(){
-        return Float.parseFloat(null);
+        float cubatureSum = 0f;
+        for(T o : immoveables){
+            cubatureSum += o.calculateCubature();
+        }
+        return cubatureSum;
     }
     public float calculateLighting(){
-        return Float.parseFloat(null);
+        float lighting = 0f;
+        for(T o : immoveables){
+            lighting += o.calculateLighting();
+        }
+        return lighting;
     }
     public float calculateHeating(){
-        return Float.parseFloat(null);
+        float heating = 0f;
+        for(T o : immoveables){
+            heating += o.calculateHeating();
+        }
+        return heating;
     }
 }
