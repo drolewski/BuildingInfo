@@ -1,13 +1,11 @@
 package com.put.buildinginfo.controller;
 
 import com.put.buildinginfo.applicationArchitecture.Level;
+import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.exception.ImmovableNotFound;
 import com.put.buildinginfo.service.FloorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -70,6 +68,21 @@ public class LevelController {
             return levelTmp;
         }
         throw new ImmovableNotFound(LEVEL_NOT_FOUND + id);
+    }
+
+    @PostMapping("")
+    public Level saveNewFloor(@RequestBody Level level) {
+        return floorService.saveNewFloor(level);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id)  {
+        floorService.deleteById(id);
+    }
+
+    @PutMapping("")
+    public Level updateFloor(@RequestBody Level level) {
+        return floorService.updateFloor(level);
     }
 
 
