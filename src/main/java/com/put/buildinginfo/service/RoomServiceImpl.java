@@ -36,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDb saveNewRoom(Room room) {
+    public Room saveNewRoom(Room room) {
         //possible to refactor - auto generation of id in frontend
         int id = 1;
         RoomDb roomDbId = roomRepo.findFirstByOrderByRoomIdDesc();
@@ -46,7 +46,8 @@ public class RoomServiceImpl implements RoomService {
         RoomDb roomDb = new RoomDb(id , room.getName(), room.getSurface(),
                                     room.getCubature(), room.getHeating(), room.getLighting());
         roomRepo.save(roomDb);
-        return roomDb;
+        Room roomRef = refactorRoomDbToRoom(roomDb.getRoomId());
+        return roomRef;
     }
 
     @Override

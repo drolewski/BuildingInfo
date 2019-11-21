@@ -46,7 +46,7 @@ public class BuildingServiceImpl implements  BuildingService{
         logger.info("Save new building in db");
         ArrayList<Integer> floorDbs = new ArrayList<>();
         for(Level o : building.getImmoveables()){
-            Integer id = floorService.saveNewFloor(o).getFloorId();
+            Integer id = floorService.saveNewFloor(o).getId();
             floorDbs.add(id);
         }
         int id = 1;

@@ -9,7 +9,7 @@ public interface RoomService {
 
     ArrayList<Room> getAllRooms();
     Room getRoomById(int id);
-    RoomDb saveNewRoom(Room room);
+    Room saveNewRoom(Room room);
     Room refactorRoomDbToRoom(int id);
     void deleteById(int id);
     float getSurface(int id);

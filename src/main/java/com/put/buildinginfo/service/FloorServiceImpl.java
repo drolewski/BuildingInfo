@@ -44,11 +44,11 @@ public class FloorServiceImpl implements  FloorService{
     }
 
     @Override
-    public FloorDb saveNewFloor(Level level) {
+    public Level saveNewFloor(Level level) {
         ArrayList<Integer> roomdbs = new ArrayList<>();
         for(Room r : level.getImmoveables()){
-            RoomDb roomTmp = roomService.saveNewRoom(r);
-            roomdbs.add(roomTmp.getRoomId());
+            Room roomTmp = roomService.saveNewRoom(r);
+            roomdbs.add(roomTmp.getId());
         }
         //possible to refactor - auto generation of id in frontend
         int id = 1;
@@ -58,7 +58,8 @@ public class FloorServiceImpl implements  FloorService{
         }
         FloorDb floorDb = new FloorDb(id , level.getName(), roomdbs);
         floorRepo.save(floorDb);
-        return floorDb;
+        Level levelRef = refactorFloorDbToLevel(floorDb.getFloorId());
+        return levelRef;
     }
 
     @Override

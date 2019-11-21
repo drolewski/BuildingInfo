@@ -9,7 +9,7 @@ public interface FloorService {
 
     ArrayList<Level> getAllFloors();
     Level getFloorById(int id);
-    FloorDb saveNewFloor(Level level);
+    Level saveNewFloor(Level level);
     Level refactorFloorDbToLevel(int id);
     float calculateSurface(int id);
     float calculateCubature(int id);
