@@ -4,9 +4,7 @@
 ## Install
 Download and install [Mongodb](https://www.mongodb.com/download-center/community)
 
-After installation create in your local disk directory with name: **data**
-
-Inside this catalog Mongo will create collection files.
+Inside this catalog data Mongo will create collection files.
 
 ## Requests
 
