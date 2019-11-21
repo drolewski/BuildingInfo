@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @Service
 public class FloorServiceImpl implements  FloorService{
 
-    final Logger logger = LoggerFactory.getLogger(FloorServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(FloorServiceImpl.class);
 
     private final FloorRepo floorRepo;
 
@@ -28,6 +28,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public ArrayList<Level> getAllFloors() {
+        logger.debug("Get all floors");
         ArrayList<FloorDb> floordbs = floorRepo.findAll();
         ArrayList<Level> levels = new ArrayList<>();
         for(FloorDb floorDb : floordbs){
@@ -39,11 +40,13 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public Level getFloorById(int id) {
+        logger.debug("Get one floor: " + id);
         return refactorFloorDbToLevel(floorRepo.findById(id).getFloorId());
     }
 
     @Override
     public Level saveNewFloor(Level level) {
+        logger.debug("Save new level in db: " + level);
         ArrayList<Integer> roomdbs = new ArrayList<>();
         for(Room r : level.getImmoveables()){
             Room roomTmp = roomService.saveNewRoom(r);
@@ -58,11 +61,13 @@ public class FloorServiceImpl implements  FloorService{
         FloorDb floorDb = new FloorDb(id , level.getName(), roomdbs);
         floorRepo.save(floorDb);
         Level levelRef = refactorFloorDbToLevel(floorDb.getFloorId());
+        logger.debug("Added level: " + levelRef);
         return levelRef;
     }
 
     @Override
     public Level refactorFloorDbToLevel(int id) {
+        logger.debug("Refactor FloorDb to Level: " + id);
         FloorDb floorDb = floorRepo.findById(id);
         boolean nullable = false;
         if(floorDb != null) {
@@ -87,6 +92,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public float calculateSurface(int id) {
+        logger.debug("Calculate Surface of the level: " + id);
         if(floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
             return level.calculateSurface();
@@ -96,6 +102,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public float calculateCubature(int id) {
+        logger.debug("Calculate cubature of the level: " + id);
         if(floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
             return level.calculateCubature();
@@ -105,6 +112,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public float calculateHeating(int id) {
+        logger.debug("Calculate heating of the level: " + id);
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
             return (level.calculateHeating()/level.calculateHeating());
@@ -114,6 +122,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public float calculateLighting(int id) {
+        logger.debug("Calculate lighting of the level: " + id);
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
             return (level.calculateLighting()/level.calculateSurface());
@@ -123,6 +132,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public void deleteById(int id) {
+        logger.debug("Delete floor from db: " + id);
         FloorDb floorDb = floorRepo.findById(id);
         if(floorDb != null){
             for(Integer i : floorDb.getRooms()){
@@ -134,6 +144,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public Level updateFloor(Level level) {
+        logger.debug("Update level in database: " + level);
         FloorDb floorDb = floorRepo.findById(level.getId());
         if(floorDb != null){
             floorDb.setName(level.getName());
@@ -151,6 +162,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public ArrayList<Level> updateFloors(ArrayList<Level> levels) {
+        logger.debug("Update many levels: " + levels);
         ArrayList<Level> floorDbs = new ArrayList<>();
         for(Level level : levels){
             Level levelUpdated = updateFloor(level);
@@ -163,6 +175,7 @@ public class FloorServiceImpl implements  FloorService{
 
     @Override
     public void deleteAll() {
+        logger.debug("Delete all floors from db.");
         floorRepo.deleteAll();
     }
 }
