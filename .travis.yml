@@ -2,7 +2,11 @@ language:
   - Java
   - node_js
 
+services:
+  - mongodb
+
 before_script:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - nvm install 10.9
   - npm install -g @angular/cli
 
