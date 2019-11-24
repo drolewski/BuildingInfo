@@ -97,4 +97,9 @@ public class LevelController {
     }
 
 
+    @PutMapping("/{id}/addRoom")
+    public Level addRoomToFloor(@PathVariable int id, @RequestBody Room room){
+        return floorService.addRoom(id, room);
+    }
+
 }
