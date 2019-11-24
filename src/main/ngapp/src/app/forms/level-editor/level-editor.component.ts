@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { Room } from 'src/app/models/room';
 import { RoomEditorComponent } from '../room-editor/room-editor.component';
+import { BuildingsService } from 'src/app/services/buildings/buildings.service';
 
 @Component({
   selector: 'app-level-editor',
@@ -11,7 +12,7 @@ import { RoomEditorComponent } from '../room-editor/room-editor.component';
 })
 export class LevelEditorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private buildingsService: BuildingsService) { }
 
   @Input()
   level: Level;
@@ -53,6 +54,10 @@ export class LevelEditorComponent implements OnInit {
 
   onSubmit() {
     this.accept.emit(this.createLevel());
+  }
+
+  onDelete() {
+    this.delete.emit();
   }
 
   createLevel() {

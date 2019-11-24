@@ -1,13 +1,13 @@
 <mat-expansion-panel class=panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div *ngIf="!isNew; else newLevelHeader">
-            {{level.name}}
-        </div>
-        <ng-template #newLevelHeader>
-          Add new Level
-        </ng-template>
+        {{isNew ? "Add new Level" : level.name}}
       </mat-panel-title>
+      <mat-panel-description class=header-icons>
+          <button mat-icon-button *ngIf="!isNew" (click)="onDelete()" class=header-icon>
+              <mat-icon>delete</mat-icon>
+          </button>
+        </mat-panel-description>
     </mat-expansion-panel-header>
 
     <form [formGroup]="form">
@@ -20,7 +20,7 @@
           <app-room-editor (accept)="addRoom($event)"></app-room-editor>
         </mat-accordion>
     </form>
-    <mat-action-row>
+    <mat-action-row *ngIf="isNew">
         <button mat-button (click)="onSubmit()">Accept</button>
     </mat-action-row>
   </mat-expansion-panel>

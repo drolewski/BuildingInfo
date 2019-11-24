@@ -5,7 +5,7 @@
       </mat-panel-title>
       <mat-panel-description class=header-icons>
         <button mat-icon-button *ngIf="room" (click)="onDelete()" class=header-icon>
-            <mat-icon *ngIf="room">delete</mat-icon>
+            <mat-icon>delete</mat-icon>
         </button>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -27,7 +27,7 @@
           <input matInput placeholder="Lighting" [formControl]="lightingForm">
       </mat-form-field>
     </form>
-    <mat-action-row>
+    <mat-action-row *ngIf="!isNew">
         <button mat-button (click)="onSubmit()">Accept</button>
     </mat-action-row>
   </mat-expansion-panel>

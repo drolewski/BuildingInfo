@@ -47,6 +47,10 @@ export class BuildingEditorComponent implements OnInit {
     }
   }
 
+  onDelete() {
+    this.buildingsService.deleteBuilding(this.building).subscribe();
+  }
+
   createBuilding(): Building {
     const building = new Building();
     building.id = this.building.id;

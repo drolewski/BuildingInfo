@@ -32,7 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=buildings>\n  <app-buildings></app-buildings>\n</div>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=buildings>\n  <app-buildings-info></app-buildings-info>\n  <app-buildings-editor></app-buildings-editor>\n</div>\n\n");
 
 /***/ }),
 
@@ -45,20 +45,46 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel>\n  <mat-expansion-panel-header>\n    <div *ngIf=\"building.id == 0; else newBuildingHeader\">\n        {{building.name}}\n    </div>\n    <ng-template #newBuildingHeader>\n      Add new Building\n    </ng-template>\n  </mat-expansion-panel-header>\n\n  <form [formGroup]=\"form\">\n      <mat-form-field>\n          <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n      </mat-form-field>\n      <app-level-editor [level]=\"l\" [parentFormArray]=\"levelsForm\" *ngFor=\"let l of building.immoveables\"></app-level-editor>\n      <app-level-editor [parentFormArray]=\"levelsForm\"></app-level-editor>\n  </form>\n</mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel [formGroup]=\"form\">\n  <mat-expansion-panel-header>\n    <div *ngIf=\"!isNew; else newBuildingHeader\">\n        {{building.name}}\n    </div>\n    <ng-template #newBuildingHeader>\n      Add new Building\n    </ng-template>\n  </mat-expansion-panel-header>\n\n  <mat-form-field>\n      <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n  </mat-form-field>\n  <mat-accordion>\n      <app-level-editor #levelEditor [level]=\"l\" [parentFormArray]=\"levelsForm\" *ngFor=\"let l of building.immoveables\"></app-level-editor>\n      <app-level-editor (accept)=\"addLevel($event)\" [parentFormArray]=\"levelsForm\"></app-level-editor>\n  </mat-accordion>\n  \n  <mat-action-row>\n      <button mat-button (click)=\"onSubmit()\">Save</button>\n  </mat-action-row>\n</mat-expansion-panel>\n");
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings/buildings.component.html":
-/*!************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings/buildings.component.html ***!
-  \************************************************************************************************/
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/building-info/building-info.component.html":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forms/building-info/building-info.component.html ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<mat-card class=card *ngIf=\"(buildings$ | async) as buildings\">\n  <mat-card-title>\n      Welcome to Building Info!\n  </mat-card-title>\n\n  <mat-accordion>\n    <app-building-editor [building]=\"b\" *ngFor=\"let b of buildings\"></app-building-editor>\n    <app-building-editor></app-building-editor>\n  </mat-accordion>\n</mat-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n  <mat-expansion-panel-header>\n    {{building.name}}\n  </mat-expansion-panel-header>\n\n  <table mat-table [dataSource]=\"data\" class=table>\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n        <th mat-header-cell *matHeaderCellDef> Name </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\n      </ng-container>\n\n      <!-- Value Column -->\n      <ng-container matColumnDef=\"value\">\n        <th mat-header-cell *matHeaderCellDef> Value </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.value | async}} </td>\n      </ng-container>\n\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n</mat-expansion-panel>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-editor/buildings-editor.component.html":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-editor/buildings-editor.component.html ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n<mat-card class=card *ngIf=\"(buildings$ | async) as buildings\">\n  <mat-card-title>\n      Edit Buildings\n  </mat-card-title>\n  <mat-accordion>\n    <app-building-editor [building]=\"b\" *ngFor=\"let b of buildings\"></app-building-editor>\n    <app-building-editor></app-building-editor>\n  </mat-accordion>\n</mat-card>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-info/buildings-info.component.html":
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-info/buildings-info.component.html ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n<mat-card class=card *ngIf=\"(buildings$ | async) as buildings\">\n  <mat-card-title>\n    Buildings Info\n  </mat-card-title>\n  <mat-accordion>\n    <app-building-info [building]=\"b\" *ngFor=\"let b of buildings\"></app-building-info>\n  </mat-accordion>\n</mat-card>\n");
 
 /***/ }),
 
@@ -71,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel>\n    <mat-expansion-panel-header>\n      <div *ngIf=\"level.id == 0; else newLevelHeader\">\n          {{level.name}}\n      </div>\n      <ng-template #newLevelHeader>\n        Add new Level\n      </ng-template>\n    </mat-expansion-panel-header>\n\n    <form [formGroup]=\"form\">\n        <mat-form-field>\n            <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n        </mat-form-field>\n        <app-room-editor [room]=\"r\" *ngFor=\"let r of level.immoveables\"></app-room-editor>\n        <app-room-editor ></app-room-editor>\n    </form>\n  </mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        <div *ngIf=\"!isNew; else newLevelHeader\">\n            {{level.name}}\n        </div>\n        <ng-template #newLevelHeader>\n          Add new Level\n        </ng-template>\n      </mat-panel-title>\n    </mat-expansion-panel-header>\n\n    <form [formGroup]=\"form\">\n        <mat-form-field>\n            <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n        </mat-form-field>\n        <mat-accordion>\n\n          <app-room-editor #roomEditor (delete)=\"deleteRoom(i)\" [room]=\"r\" *ngFor=\"let r of level.immoveables; let i = index\"></app-room-editor>\n          <app-room-editor (accept)=\"addRoom($event)\"></app-room-editor>\n        </mat-accordion>\n    </form>\n    <mat-action-row>\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
 
 /***/ }),
 
@@ -84,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel>\n    <mat-expansion-panel-header>\n      <div *ngIf=\"isNew; else newRoomHeader\">\n          {{room.name}}\n      </div>\n      <ng-template #newRoomHeader>\n        Add new room!\n      </ng-template>\n    </mat-expansion-panel-header>\n\n    <form [formGroup]=\"form\">\n      <mat-form-field>\n          <input matInput [formControl]=\"nameForm\">\n      </mat-form-field>\n      <mat-form-field>\n          <input matInput [formControl]=\"surfaceForm\">\n      </mat-form-field>\n      <mat-form-field>\n          <input matInput [formControl]=\"cubatureForm\">\n      </mat-form-field>\n      <mat-form-field>\n          <input matInput [formControl]=\"heatingForm\">\n      </mat-form-field>\n      <mat-form-field>\n          <input matInput [formControl]=\"lightingForm\">\n      </mat-form-field>\n\n      <button type=\"submit\">Accept</button>\n    </form>\n  </mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n          {{room ? room.name : 'Add new room!'}}\n      </mat-panel-title>\n      <mat-panel-description class=header-icons>\n        <button mat-icon-button *ngIf=\"room\" (click)=\"onDelete()\" class=header-icon>\n            <mat-icon *ngIf=\"room\">delete</mat-icon>\n        </button>\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <form class=form-container [formGroup]=\"form\" (submit)=\"onSubmit()\">\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Surface\" [formControl]=\"surfaceForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Cubature\" [formControl]=\"cubatureForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Heating\" [formControl]=\"heatingForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Lighting\" [formControl]=\"lightingForm\">\n      </mat-form-field>\n    </form>\n    <mat-action-row>\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
 
 /***/ }),
 
@@ -356,7 +382,7 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".buildings {\n  padding: 5em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFxEb21pbmlrXFxJZGVhUHJvamVjdHNcXEJ1aWxkaW5nSW5mb1xcc3JjXFxtYWluXFxuZ2FwcC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnVpbGRpbmdzIHtcclxuICBwYWRkaW5nOiA1ZW07XHJcbn1cclxuIiwiLmJ1aWxkaW5ncyB7XG4gIHBhZGRpbmc6IDVlbTtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("@import url(\"https://fonts.googleapis.com/icon?family=Material+Icons\");\n.buildings {\n  padding: 5em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFxEb21pbmlrXFxJZGVhUHJvamVjdHNcXEJ1aWxkaW5nSW5mb1xcc3JjXFxtYWluXFxuZ2FwcC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQVEsc0VBQUE7QUFFUjtFQUNFLFlBQUE7QUNBRiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgdXJsKFwiaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9pY29uP2ZhbWlseT1NYXRlcmlhbCtJY29uc1wiKTtcclxuXHJcbi5idWlsZGluZ3Mge1xyXG4gIHBhZGRpbmc6IDVlbTtcclxufVxyXG4iLCJAaW1wb3J0IHVybChcImh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vaWNvbj9mYW1pbHk9TWF0ZXJpYWwrSWNvbnNcIik7XG4uYnVpbGRpbmdzIHtcbiAgcGFkZGluZzogNWVtO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -406,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _forms_buildings_buildings_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms/buildings/buildings.component */ "./src/app/forms/buildings/buildings.component.ts");
+/* harmony import */ var _forms_buildings_editor_buildings_editor_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms/buildings-editor/buildings-editor.component */ "./src/app/forms/buildings-editor/buildings-editor.component.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _modules_material_material_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/material/material.module */ "./src/app/modules/material/material.module.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
@@ -414,6 +440,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _forms_room_editor_room_editor_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forms/room-editor/room-editor.component */ "./src/app/forms/room-editor/room-editor.component.ts");
 /* harmony import */ var _forms_level_editor_level_editor_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./forms/level-editor/level-editor.component */ "./src/app/forms/level-editor/level-editor.component.ts");
+/* harmony import */ var _forms_buildings_info_buildings_info_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./forms/buildings-info/buildings-info.component */ "./src/app/forms/buildings-info/buildings-info.component.ts");
+/* harmony import */ var _forms_building_info_building_info_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./forms/building-info/building-info.component */ "./src/app/forms/building-info/building-info.component.ts");
+
+
 
 
 
@@ -433,10 +463,12 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-            _forms_buildings_buildings_component__WEBPACK_IMPORTED_MODULE_5__["BuildingsComponent"],
+            _forms_buildings_editor_buildings_editor_component__WEBPACK_IMPORTED_MODULE_5__["BuildingsEditorComponent"],
             _forms_building_editor_building_editor_component__WEBPACK_IMPORTED_MODULE_9__["BuildingEditorComponent"],
             _forms_room_editor_room_editor_component__WEBPACK_IMPORTED_MODULE_11__["RoomEditorComponent"],
-            _forms_level_editor_level_editor_component__WEBPACK_IMPORTED_MODULE_12__["LevelEditorComponent"]
+            _forms_level_editor_level_editor_component__WEBPACK_IMPORTED_MODULE_12__["LevelEditorComponent"],
+            _forms_buildings_info_buildings_info_component__WEBPACK_IMPORTED_MODULE_13__["BuildingsInfoComponent"],
+            _forms_building_info_building_info_component__WEBPACK_IMPORTED_MODULE_14__["BuildingInfoComponent"]
         ],
         imports: [
             // Angular modules
@@ -466,7 +498,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL2J1aWxkaW5nLWVkaXRvci9idWlsZGluZy1lZGl0b3IuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #1b1b1b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxidWlsZGluZy1lZGl0b3JcXGJ1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL2J1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9mb3Jtcy9idWlsZGluZy1lZGl0b3IvYnVpbGRpbmctZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbmVsIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjcsIDI3LCAyNyk7XHJcbn1cclxuIiwiLnBhbmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFiMWIxYjtcbn0iXX0= */");
 
 /***/ }),
 
@@ -484,12 +516,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_models_building__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/building */ "./src/app/models/building.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+
 
 
 
 
 let BuildingEditorComponent = class BuildingEditorComponent {
-    constructor() {
+    constructor(buildingsService) {
+        this.buildingsService = buildingsService;
         this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
         this.levelsForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormArray"]([]);
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -498,17 +533,50 @@ let BuildingEditorComponent = class BuildingEditorComponent {
         });
     }
     ngOnInit() {
+        this.isNew = this.building == null;
         if (!this.building) {
             this.building = new src_app_models_building__WEBPACK_IMPORTED_MODULE_2__["Building"]();
         }
+        this.fillForm();
+    }
+    onSubmit() {
+        const building = this.createBuilding();
+        if (this.isNew) {
+            this.buildingsService.createBuilding(building).subscribe();
+        }
+        else {
+            console.log(building);
+            this.buildingsService.updateBuilding(building).subscribe();
+        }
+    }
+    createBuilding() {
+        const building = new src_app_models_building__WEBPACK_IMPORTED_MODULE_2__["Building"]();
+        building.id = this.building.id;
+        building.name = this.nameForm.value;
+        building.immoveables = this.levelEditorComponents.map(component => {
+            return component.createLevel();
+        });
+        return building;
     }
     fillForm() {
         this.nameForm.setValue(this.building.name);
     }
+    addLevel(level) {
+        this.building.immoveables.push(level);
+    }
+    deleteLevel(i) {
+        this.building.immoveables.splice(i, 1);
+    }
 };
+BuildingEditorComponent.ctorParameters = () => [
+    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__["BuildingsService"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], BuildingEditorComponent.prototype, "building", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChildren"])('levelEditor')
+], BuildingEditorComponent.prototype, "levelEditorComponents", void 0);
 BuildingEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-building-editor',
@@ -521,36 +589,100 @@ BuildingEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/forms/buildings/buildings.component.scss":
-/*!**********************************************************!*\
-  !*** ./src/app/forms/buildings/buildings.component.scss ***!
-  \**********************************************************/
+/***/ "./src/app/forms/building-info/building-info.component.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/forms/building-info/building-info.component.scss ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".card {\n  opacity: 0.7;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxidWlsZGluZ3NcXGJ1aWxkaW5ncy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzL2J1aWxkaW5ncy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNFLFlBQUE7QUNBRiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL2J1aWxkaW5ncy9idWlsZGluZ3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuLmNhcmQge1xyXG4gIG9wYWNpdHk6IDAuNztcclxufVxyXG4iLCIuY2FyZCB7XG4gIG9wYWNpdHk6IDAuNztcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #1b1b1b;\n}\n\n.table {\n  width: 100%;\n  background-color: #1b1b1b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctaW5mby9DOlxcVXNlcnNcXERvbWluaWtcXElkZWFQcm9qZWN0c1xcQnVpbGRpbmdJbmZvXFxzcmNcXG1haW5cXG5nYXBwL3NyY1xcYXBwXFxmb3Jtc1xcYnVpbGRpbmctaW5mb1xcYnVpbGRpbmctaW5mby5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctaW5mby9idWlsZGluZy1pbmZvLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQUE7QUNDRjs7QURFQTtFQUNFLFdBQUE7RUFDQSx5QkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvZm9ybXMvYnVpbGRpbmctaW5mby9idWlsZGluZy1pbmZvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbmVsIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjcsIDI3LCAyNyk7XHJcbn1cclxuXHJcbi50YWJsZSB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI3LCAyNywgMjcpO1xyXG59XHJcbiIsIi5wYW5lbCB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxYjFiMWI7XG59XG5cbi50YWJsZSB7XG4gIHdpZHRoOiAxMDAlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMWIxYjFiO1xufSJdfQ== */");
 
 /***/ }),
 
-/***/ "./src/app/forms/buildings/buildings.component.ts":
-/*!********************************************************!*\
-  !*** ./src/app/forms/buildings/buildings.component.ts ***!
-  \********************************************************/
-/*! exports provided: BuildingsComponent */
+/***/ "./src/app/forms/building-info/building-info.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/forms/building-info/building-info.component.ts ***!
+  \****************************************************************/
+/*! exports provided: BuildingInfoComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuildingsComponent", function() { return BuildingsComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuildingInfoComponent", function() { return BuildingInfoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
 
 
 
-let BuildingsComponent = class BuildingsComponent {
+let BuildingInfoComponent = class BuildingInfoComponent {
+    constructor(buildingsService) {
+        this.buildingsService = buildingsService;
+        this.displayedColumns = ['name', 'value'];
+    }
+    ngOnInit() {
+        this.initData();
+    }
+    initData() {
+        this.data = [
+            { name: 'Surface', value: this.buildingsService.getSurface(this.building) },
+            { name: 'Cubature', value: this.buildingsService.getCubature(this.building) },
+            { name: 'Lighting', value: this.buildingsService.getLighting(this.building) },
+            { name: 'Heating', value: this.buildingsService.getHeating(this.building) }
+        ];
+    }
+};
+BuildingInfoComponent.ctorParameters = () => [
+    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__["BuildingsService"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], BuildingInfoComponent.prototype, "building", void 0);
+BuildingInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-building-info',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./building-info.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/building-info/building-info.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./building-info.component.scss */ "./src/app/forms/building-info/building-info.component.scss")).default]
+    })
+], BuildingInfoComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/forms/buildings-editor/buildings-editor.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/forms/buildings-editor/buildings-editor.component.scss ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".card {\n  opacity: 0.85;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzLWVkaXRvci9DOlxcVXNlcnNcXERvbWluaWtcXElkZWFQcm9qZWN0c1xcQnVpbGRpbmdJbmZvXFxzcmNcXG1haW5cXG5nYXBwL3NyY1xcYXBwXFxmb3Jtc1xcYnVpbGRpbmdzLWVkaXRvclxcYnVpbGRpbmdzLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzLWVkaXRvci9idWlsZGluZ3MtZWRpdG9yLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0UsYUFBQTtBQ0FGIiwiZmlsZSI6InNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzLWVkaXRvci9idWlsZGluZ3MtZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jYXJkIHtcclxuICBvcGFjaXR5OiAwLjg1O1xyXG59XHJcbiIsIi5jYXJkIHtcbiAgb3BhY2l0eTogMC44NTtcbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/forms/buildings-editor/buildings-editor.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/forms/buildings-editor/buildings-editor.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: BuildingsEditorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuildingsEditorComponent", function() { return BuildingsEditorComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+
+
+
+let BuildingsEditorComponent = class BuildingsEditorComponent {
     constructor(buildingsService) {
         this.buildingsService = buildingsService;
     }
@@ -558,16 +690,68 @@ let BuildingsComponent = class BuildingsComponent {
         this.buildings$ = this.buildingsService.getBuildings$();
     }
 };
-BuildingsComponent.ctorParameters = () => [
+BuildingsEditorComponent.ctorParameters = () => [
     { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__["BuildingsService"] }
 ];
-BuildingsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+BuildingsEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-buildings',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./buildings.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings/buildings.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./buildings.component.scss */ "./src/app/forms/buildings/buildings.component.scss")).default]
+        selector: 'app-buildings-editor',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./buildings-editor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-editor/buildings-editor.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./buildings-editor.component.scss */ "./src/app/forms/buildings-editor/buildings-editor.component.scss")).default]
     })
-], BuildingsComponent);
+], BuildingsEditorComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/forms/buildings-info/buildings-info.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/forms/buildings-info/buildings-info.component.scss ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".card {\n  opacity: 0.85;\n  margin-bottom: 5em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzLWluZm8vQzpcXFVzZXJzXFxEb21pbmlrXFxJZGVhUHJvamVjdHNcXEJ1aWxkaW5nSW5mb1xcc3JjXFxtYWluXFxuZ2FwcC9zcmNcXGFwcFxcZm9ybXNcXGJ1aWxkaW5ncy1pbmZvXFxidWlsZGluZ3MtaW5mby5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmdzLWluZm8vYnVpbGRpbmdzLWluZm8uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0Esa0JBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL2J1aWxkaW5ncy1pbmZvL2J1aWxkaW5ncy1pbmZvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNhcmQge1xyXG4gIG9wYWNpdHk6IDAuODU7XHJcbiAgbWFyZ2luLWJvdHRvbTogNWVtO1xyXG59XHJcbiIsIi5jYXJkIHtcbiAgb3BhY2l0eTogMC44NTtcbiAgbWFyZ2luLWJvdHRvbTogNWVtO1xufSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/forms/buildings-info/buildings-info.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/forms/buildings-info/buildings-info.component.ts ***!
+  \******************************************************************/
+/*! exports provided: BuildingsInfoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuildingsInfoComponent", function() { return BuildingsInfoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+
+
+
+let BuildingsInfoComponent = class BuildingsInfoComponent {
+    constructor(buildingsService) {
+        this.buildingsService = buildingsService;
+        this.buildings$ = buildingsService.getBuildings$();
+    }
+    ngOnInit() {
+    }
+};
+BuildingsInfoComponent.ctorParameters = () => [
+    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_2__["BuildingsService"] }
+];
+BuildingsInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-buildings-info',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./buildings-info.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/forms/buildings-info/buildings-info.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./buildings-info.component.scss */ "./src/app/forms/buildings-info/buildings-info.component.scss")).default]
+    })
+], BuildingsInfoComponent);
 
 
 
@@ -582,7 +766,7 @@ BuildingsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL2xldmVsLWVkaXRvci9sZXZlbC1lZGl0b3IuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #424242;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxsZXZlbC1lZGl0b3JcXGxldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL2xldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9mb3Jtcy9sZXZlbC1lZGl0b3IvbGV2ZWwtZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbmVsIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDI0MjQyXHJcbn1cclxuIiwiLnBhbmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzQyNDI0Mjtcbn0iXX0= */");
 
 /***/ }),
 
@@ -606,6 +790,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let LevelEditorComponent = class LevelEditorComponent {
     constructor() {
+        this.accept = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
         this.roomsForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormArray"]([]);
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
@@ -614,6 +800,7 @@ let LevelEditorComponent = class LevelEditorComponent {
         });
     }
     ngOnInit() {
+        this.isNew = this.level == null;
         if (!this.level) {
             this.level = new src_app_models_level__WEBPACK_IMPORTED_MODULE_3__["Level"]();
         }
@@ -623,6 +810,23 @@ let LevelEditorComponent = class LevelEditorComponent {
     fillForm() {
         this.nameForm.setValue(this.level.name);
     }
+    onSubmit() {
+        this.accept.emit(this.createLevel());
+    }
+    createLevel() {
+        const level = new src_app_models_level__WEBPACK_IMPORTED_MODULE_3__["Level"]();
+        level.name = this.nameForm.value;
+        level.immoveables = this.roomEditorcomponents.map((component) => {
+            return component.createRoom();
+        });
+        return level;
+    }
+    addRoom(room) {
+        this.level.immoveables.push(room);
+    }
+    deleteRoom(i) {
+        this.level.immoveables.splice(i, 1);
+    }
 };
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -630,6 +834,15 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], LevelEditorComponent.prototype, "parentFormArray", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], LevelEditorComponent.prototype, "accept", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], LevelEditorComponent.prototype, "delete", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChildren"])('roomEditor')
+], LevelEditorComponent.prototype, "roomEditorcomponents", void 0);
 LevelEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-level-editor',
@@ -651,7 +864,7 @@ LevelEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL3Jvb20tZWRpdG9yL3Jvb20tZWRpdG9yLmNvbXBvbmVudC5zY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".form-container {\n  display: flex;\n  flex-direction: column;\n}\n\n.header-icons {\n  justify-content: flex-end;\n}\n\n.header-icon {\n  position: absolute;\n  margin-top: -10px;\n}\n\n.input {\n  max-width: 200px;\n}\n\n.panel {\n  background-color: #1b1b1b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvcm9vbS1lZGl0b3IvQzpcXFVzZXJzXFxEb21pbmlrXFxJZGVhUHJvamVjdHNcXEJ1aWxkaW5nSW5mb1xcc3JjXFxtYWluXFxuZ2FwcC9zcmNcXGFwcFxcZm9ybXNcXHJvb20tZWRpdG9yXFxyb29tLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvcm9vbS1lZGl0b3Ivcm9vbS1lZGl0b3IuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7QUNDRjs7QURFQTtFQUNFLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtBQ0NGOztBREVBO0VBQ0UseUJBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2Zvcm1zL3Jvb20tZWRpdG9yL3Jvb20tZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvcm0tY29udGFpbmVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbn1cclxuXHJcbi5oZWFkZXItaWNvbnMge1xyXG4gIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XHJcbn1cclxuXHJcbi5oZWFkZXItaWNvbiB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIG1hcmdpbi10b3A6IC0xMHB4O1xyXG59XHJcblxyXG4uaW5wdXQge1xyXG4gIG1heC13aWR0aDogMjAwcHg7XHJcbn1cclxuXHJcbi5wYW5lbCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI3LCAyNywgMjcpO1xyXG59XHJcbiIsIi5mb3JtLWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5cbi5oZWFkZXItaWNvbnMge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xufVxuXG4uaGVhZGVyLWljb24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIG1hcmdpbi10b3A6IC0xMHB4O1xufVxuXG4uaW5wdXQge1xuICBtYXgtd2lkdGg6IDIwMHB4O1xufVxuXG4ucGFuZWwge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMWIxYjFiO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -667,20 +880,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoomEditorComponent", function() { return RoomEditorComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var src_app_models_room__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/room */ "./src/app/models/room.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+
 
 
 
 let RoomEditorComponent = class RoomEditorComponent {
     constructor() {
-        this.add = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.accept = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         // Reactive forms
-        this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-        this.surfaceForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-        this.cubatureForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-        this.heatingForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-        this.lightingForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+        this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
+        this.surfaceForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
+        this.cubatureForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
+        this.heatingForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
+        this.lightingForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
             name: this.nameForm,
             surface: this.surfaceForm,
             cubature: this.cubatureForm,
@@ -689,7 +905,6 @@ let RoomEditorComponent = class RoomEditorComponent {
         });
     }
     ngOnInit() {
-        this.isNew = this.room == null;
         this.fillForm();
     }
     fillForm() {
@@ -701,13 +916,32 @@ let RoomEditorComponent = class RoomEditorComponent {
             this.lightingForm.setValue(this.room.lighting);
         }
     }
+    onSubmit() {
+        const room = this.createRoom();
+        this.accept.emit(room);
+    }
+    onDelete() {
+        this.delete.emit();
+    }
+    createRoom() {
+        const room = new src_app_models_room__WEBPACK_IMPORTED_MODULE_2__["Room"]();
+        room.name = this.nameForm.value;
+        room.surface = this.surfaceForm.value;
+        room.cubature = this.cubatureForm.value;
+        room.heating = this.heatingForm.value;
+        room.lighting = this.lightingForm.value;
+        return room;
+    }
 };
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], RoomEditorComponent.prototype, "room", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
-], RoomEditorComponent.prototype, "add", void 0);
+], RoomEditorComponent.prototype, "accept", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], RoomEditorComponent.prototype, "delete", void 0);
 RoomEditorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-room-editor',
@@ -733,6 +967,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 
 class Immovable {
+    constructor() {
+        this.id = 0;
+    }
 }
 
 
@@ -802,6 +1039,26 @@ class Level extends _composite__WEBPACK_IMPORTED_MODULE_1__["Composite"] {
 
 /***/ }),
 
+/***/ "./src/app/models/room.ts":
+/*!********************************!*\
+  !*** ./src/app/models/room.ts ***!
+  \********************************/
+/*! exports provided: Room */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Room", function() { return Room; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _Immovable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Immovable */ "./src/app/models/Immovable.ts");
+
+
+class Room extends _Immovable__WEBPACK_IMPORTED_MODULE_1__["Immovable"] {
+}
+
+
+/***/ }),
+
 /***/ "./src/app/modules/material/material.module.ts":
 /*!*****************************************************!*\
   !*** ./src/app/modules/material/material.module.ts ***!
@@ -821,6 +1078,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/divider */ "./node_modules/@angular/material/esm2015/divider.js");
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm2015/button.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm2015/icon.js");
+/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
+
+
 
 
 
@@ -842,7 +1103,9 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormFieldModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"],
             _angular_material_divider__WEBPACK_IMPORTED_MODULE_7__["MatDividerModule"],
-            _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"]
+            _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"]
         ],
         exports: [
             _angular_material_card__WEBPACK_IMPORTED_MODULE_3__["MatCardModule"],
@@ -850,7 +1113,9 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormFieldModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"],
             _angular_material_divider__WEBPACK_IMPORTED_MODULE_7__["MatDividerModule"],
-            _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"]
+            _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"]
         ]
     })
 ], MaterialModule);
@@ -873,6 +1138,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
 
 
 
@@ -885,6 +1152,33 @@ let BuildingsService = class BuildingsService {
     }
     getBuildings$() {
         return this.buildings$.asObservable();
+    }
+    getSurface(building) {
+        return this.http.get('/building/surface/' + building.id);
+    }
+    getCubature(building) {
+        return this.http.get('/building/cubature/' + building.id);
+    }
+    getLighting(building) {
+        return this.http.get('/building/lighting/' + building.id);
+    }
+    getHeating(building) {
+        return this.http.get('/building/heating/' + building.id);
+    }
+    createBuilding(building) {
+        return this.http.post('/building', building).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(() => {
+            this.updateBuildings$();
+        }));
+    }
+    updateBuilding(building) {
+        return this.http.put('/building', building).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(() => {
+            this.updateBuildings$();
+        }));
+    }
+    deleteBuilding(building) {
+        return this.http.delete('/building/' + building.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(() => {
+            this.updateBuildings$();
+        }));
     }
     updateBuildings$() {
         this.http.get('/building').subscribe((result) => {

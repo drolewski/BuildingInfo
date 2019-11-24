@@ -3,6 +3,7 @@ import { Building } from 'src/app/models/building';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {tap} from 'rxjs/operators';
+import { Level } from 'src/app/models/level';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,12 @@ export class BuildingsService {
 
   public deleteBuilding(building: Building): Observable<void> {
     return this.http.delete('/building/' + building.id).pipe(tap(() => {
+      this.updateBuildings$();
+    })) as Observable<void>;
+  }
+
+  public deleteLevel(level: Level): Observable<void> {
+    return this.http.delete('/level/' + level.id).pipe(tap(() => {
       this.updateBuildings$();
     })) as Observable<void>;
   }
