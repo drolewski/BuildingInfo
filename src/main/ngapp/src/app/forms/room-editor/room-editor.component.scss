@@ -1,0 +1,21 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-icons {
+  justify-content: flex-end;
+}
+
+.header-icon {
+  position: absolute;
+  margin-top: -10px;
+}
+
+.input {
+  max-width: 200px;
+}
+
+.panel {
+  background-color: rgb(27, 27, 27);
+}

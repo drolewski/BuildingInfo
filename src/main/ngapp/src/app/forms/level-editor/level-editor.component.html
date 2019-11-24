@@ -1,0 +1,26 @@
+<mat-expansion-panel class=panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div *ngIf="!isNew; else newLevelHeader">
+            {{level.name}}
+        </div>
+        <ng-template #newLevelHeader>
+          Add new Level
+        </ng-template>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="form">
+        <mat-form-field>
+            <input matInput placeholder="Name" [formControl]="nameForm">
+        </mat-form-field>
+        <mat-accordion>
+
+          <app-room-editor #roomEditor (delete)="deleteRoom(i)" [room]="r" *ngFor="let r of level.immoveables; let i = index"></app-room-editor>
+          <app-room-editor (accept)="addRoom($event)"></app-room-editor>
+        </mat-accordion>
+    </form>
+    <mat-action-row>
+        <button mat-button (click)="onSubmit()">Accept</button>
+    </mat-action-row>
+  </mat-expansion-panel>

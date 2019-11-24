@@ -1,0 +1,22 @@
+<mat-expansion-panel class=panel [formGroup]="form">
+  <mat-expansion-panel-header>
+    <div *ngIf="!isNew; else newBuildingHeader">
+        {{building.name}}
+    </div>
+    <ng-template #newBuildingHeader>
+      Add new Building
+    </ng-template>
+  </mat-expansion-panel-header>
+
+  <mat-form-field>
+      <input matInput placeholder="Name" [formControl]="nameForm">
+  </mat-form-field>
+  <mat-accordion>
+      <app-level-editor #levelEditor [level]="l" [parentFormArray]="levelsForm" *ngFor="let l of building.immoveables"></app-level-editor>
+      <app-level-editor (accept)="addLevel($event)" [parentFormArray]="levelsForm"></app-level-editor>
+  </mat-accordion>
+  
+  <mat-action-row>
+      <button mat-button (click)="onSubmit()">Save</button>
+  </mat-action-row>
+</mat-expansion-panel>
