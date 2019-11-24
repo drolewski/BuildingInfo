@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel [formGroup]=\"form\">\n  <mat-expansion-panel-header>\n    <div *ngIf=\"!isNew; else newBuildingHeader\">\n        {{building.name}}\n    </div>\n    <ng-template #newBuildingHeader>\n      Add new Building\n    </ng-template>\n  </mat-expansion-panel-header>\n\n  <mat-form-field>\n      <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n  </mat-form-field>\n  <mat-accordion>\n      <app-level-editor #levelEditor [level]=\"l\" [parentFormArray]=\"levelsForm\" *ngFor=\"let l of building.immoveables\"></app-level-editor>\n      <app-level-editor (accept)=\"addLevel($event)\" [parentFormArray]=\"levelsForm\"></app-level-editor>\n  </mat-accordion>\n  \n  <mat-action-row>\n      <button mat-button (click)=\"onSubmit()\">Save</button>\n  </mat-action-row>\n</mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel [formGroup]=\"form\">\n  <mat-expansion-panel-header>\n      <mat-panel-title>\n          {{isNew ? \"Add new building\" : building.name}}\n      </mat-panel-title>\n      <mat-panel-description class=header-icons>\n        <button mat-icon-button *ngIf=\"!isNew\" (click)=\"onDelete()\" class=header-icon>\n            <mat-icon>delete</mat-icon>\n        </button>\n      </mat-panel-description>\n  </mat-expansion-panel-header>\n\n  <mat-form-field>\n      <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n  </mat-form-field>\n  <mat-accordion>\n      <app-level-editor (delete)=\"deleteLevel(i)\" #levelEditor [level]=\"l\" [parentFormArray]=\"levelsForm\" *ngFor=\"let l of building.immoveables; let i = index\"></app-level-editor>\n      <app-level-editor (accept)=\"addLevel($event)\" [parentFormArray]=\"levelsForm\"></app-level-editor>\n  </mat-accordion>\n\n  <mat-action-row>\n      <button mat-button (click)=\"onSubmit()\">Save</button>\n  </mat-action-row>\n</mat-expansion-panel>\n");
 
 /***/ }),
 
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        <div *ngIf=\"!isNew; else newLevelHeader\">\n            {{level.name}}\n        </div>\n        <ng-template #newLevelHeader>\n          Add new Level\n        </ng-template>\n      </mat-panel-title>\n    </mat-expansion-panel-header>\n\n    <form [formGroup]=\"form\">\n        <mat-form-field>\n            <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n        </mat-form-field>\n        <mat-accordion>\n\n          <app-room-editor #roomEditor (delete)=\"deleteRoom(i)\" [room]=\"r\" *ngFor=\"let r of level.immoveables; let i = index\"></app-room-editor>\n          <app-room-editor (accept)=\"addRoom($event)\"></app-room-editor>\n        </mat-accordion>\n    </form>\n    <mat-action-row>\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        {{isNew ? \"Add new Level\" : level.name}}\n      </mat-panel-title>\n      <mat-panel-description class=header-icons>\n          <button mat-icon-button *ngIf=\"!isNew\" (click)=\"onDelete()\" class=header-icon>\n              <mat-icon>delete</mat-icon>\n          </button>\n        </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <form [formGroup]=\"form\">\n        <mat-form-field>\n            <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n        </mat-form-field>\n        <mat-accordion>\n\n          <app-room-editor #roomEditor (delete)=\"deleteRoom(i)\" [room]=\"r\" *ngFor=\"let r of level.immoveables; let i = index\"></app-room-editor>\n          <app-room-editor (accept)=\"addRoom($event)\"></app-room-editor>\n        </mat-accordion>\n    </form>\n    <mat-action-row *ngIf=\"isNew\">\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
 
 /***/ }),
 
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n          {{room ? room.name : 'Add new room!'}}\n      </mat-panel-title>\n      <mat-panel-description class=header-icons>\n        <button mat-icon-button *ngIf=\"room\" (click)=\"onDelete()\" class=header-icon>\n            <mat-icon *ngIf=\"room\">delete</mat-icon>\n        </button>\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <form class=form-container [formGroup]=\"form\" (submit)=\"onSubmit()\">\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Surface\" [formControl]=\"surfaceForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Cubature\" [formControl]=\"cubatureForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Heating\" [formControl]=\"heatingForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Lighting\" [formControl]=\"lightingForm\">\n      </mat-form-field>\n    </form>\n    <mat-action-row>\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel class=panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n          {{room ? room.name : 'Add new room!'}}\n      </mat-panel-title>\n      <mat-panel-description class=header-icons>\n        <button mat-icon-button *ngIf=\"room\" (click)=\"onDelete()\" class=header-icon>\n            <mat-icon>delete</mat-icon>\n        </button>\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <form class=form-container [formGroup]=\"form\" (submit)=\"onSubmit()\">\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Name\" [formControl]=\"nameForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Surface\" [formControl]=\"surfaceForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Cubature\" [formControl]=\"cubatureForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Heating\" [formControl]=\"heatingForm\">\n      </mat-form-field>\n      <mat-form-field class=input>\n          <input matInput placeholder=\"Lighting\" [formControl]=\"lightingForm\">\n      </mat-form-field>\n    </form>\n    <mat-action-row *ngIf=\"!room\">\n        <button mat-button (click)=\"onSubmit()\">Accept</button>\n    </mat-action-row>\n  </mat-expansion-panel>\n");
 
 /***/ }),
 
@@ -498,7 +498,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #1b1b1b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxidWlsZGluZy1lZGl0b3JcXGJ1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL2J1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9mb3Jtcy9idWlsZGluZy1lZGl0b3IvYnVpbGRpbmctZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbmVsIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjcsIDI3LCAyNyk7XHJcbn1cclxuIiwiLnBhbmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFiMWIxYjtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #1b1b1b;\n}\n\n.header-icons {\n  justify-content: flex-end;\n}\n\n.header-icon {\n  position: absolute;\n  margin-top: -10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxidWlsZGluZy1lZGl0b3JcXGJ1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL2J1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSx5QkFBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvZm9ybXMvYnVpbGRpbmctZWRpdG9yL2J1aWxkaW5nLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wYW5lbCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI3LCAyNywgMjcpO1xyXG59XHJcblxyXG4uaGVhZGVyLWljb25zIHtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xyXG59XHJcblxyXG4uaGVhZGVyLWljb24ge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBtYXJnaW4tdG9wOiAtMTBweDtcclxufVxyXG4iLCIucGFuZWwge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMWIxYjFiO1xufVxuXG4uaGVhZGVyLWljb25zIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmhlYWRlci1pY29uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBtYXJnaW4tdG9wOiAtMTBweDtcbn0iXX0= */");
 
 /***/ }),
 
@@ -548,6 +548,9 @@ let BuildingEditorComponent = class BuildingEditorComponent {
             console.log(building);
             this.buildingsService.updateBuilding(building).subscribe();
         }
+    }
+    onDelete() {
+        this.buildingsService.deleteBuilding(this.building).subscribe();
     }
     createBuilding() {
         const building = new src_app_models_building__WEBPACK_IMPORTED_MODULE_2__["Building"]();
@@ -766,7 +769,7 @@ BuildingsInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #424242;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxsZXZlbC1lZGl0b3JcXGxldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL2xldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9mb3Jtcy9sZXZlbC1lZGl0b3IvbGV2ZWwtZWRpdG9yLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbmVsIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDI0MjQyXHJcbn1cclxuIiwiLnBhbmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzQyNDI0Mjtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".panel {\n  background-color: #424242;\n}\n\n.header-icons {\n  justify-content: flex-end;\n}\n\n.header-icon {\n  position: absolute;\n  margin-top: -10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL0M6XFxVc2Vyc1xcRG9taW5pa1xcSWRlYVByb2plY3RzXFxCdWlsZGluZ0luZm9cXHNyY1xcbWFpblxcbmdhcHAvc3JjXFxhcHBcXGZvcm1zXFxsZXZlbC1lZGl0b3JcXGxldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL2xldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSx5QkFBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvZm9ybXMvbGV2ZWwtZWRpdG9yL2xldmVsLWVkaXRvci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wYW5lbCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzQyNDI0MlxyXG59XHJcblxyXG4uaGVhZGVyLWljb25zIHtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xyXG59XHJcblxyXG4uaGVhZGVyLWljb24ge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBtYXJnaW4tdG9wOiAtMTBweDtcclxufVxyXG4iLCIucGFuZWwge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDI0MjQyO1xufVxuXG4uaGVhZGVyLWljb25zIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmhlYWRlci1pY29uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBtYXJnaW4tdG9wOiAtMTBweDtcbn0iXX0= */");
 
 /***/ }),
 
@@ -784,12 +787,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var src_app_models_level__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/models/level */ "./src/app/models/level.ts");
+/* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+
 
 
 
 
 let LevelEditorComponent = class LevelEditorComponent {
-    constructor() {
+    constructor(buildingsService) {
+        this.buildingsService = buildingsService;
         this.accept = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
@@ -813,6 +819,9 @@ let LevelEditorComponent = class LevelEditorComponent {
     onSubmit() {
         this.accept.emit(this.createLevel());
     }
+    onDelete() {
+        this.delete.emit();
+    }
     createLevel() {
         const level = new src_app_models_level__WEBPACK_IMPORTED_MODULE_3__["Level"]();
         level.name = this.nameForm.value;
@@ -828,6 +837,9 @@ let LevelEditorComponent = class LevelEditorComponent {
         this.level.immoveables.splice(i, 1);
     }
 };
+LevelEditorComponent.ctorParameters = () => [
+    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__["BuildingsService"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], LevelEditorComponent.prototype, "level", void 0);
@@ -1177,6 +1189,11 @@ let BuildingsService = class BuildingsService {
     }
     deleteBuilding(building) {
         return this.http.delete('/building/' + building.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(() => {
+            this.updateBuildings$();
+        }));
+    }
+    deleteLevel(level) {
+        return this.http.delete('/level/' + level.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(() => {
             this.updateBuildings$();
         }));
     }

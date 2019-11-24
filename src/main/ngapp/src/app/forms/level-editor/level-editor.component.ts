@@ -4,6 +4,7 @@ import { Level } from 'src/app/models/level';
 import { Room } from 'src/app/models/room';
 import { RoomEditorComponent } from '../room-editor/room-editor.component';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-level-editor',
@@ -12,7 +13,7 @@ import { BuildingsService } from 'src/app/services/buildings/buildings.service';
 })
 export class LevelEditorComponent implements OnInit {
 
-  constructor(private buildingsService: BuildingsService) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   @Input()
   level: Level;
@@ -53,11 +54,18 @@ export class LevelEditorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.accept.emit(this.createLevel());
+    const level = this.createLevel();
+    this.accept.emit(level);
+    this.snackBar.open(level.name + ' has been successfully created!', 'Close', {
+      duration: 2000,
+    });
   }
 
   onDelete() {
     this.delete.emit();
+    this.snackBar.open(this.level.name + ' has been deleted!', 'Close', {
+      duration: 2000,
+    });
   }
 
   createLevel() {

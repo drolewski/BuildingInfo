@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Room } from 'src/app/models/room';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-room-editor',
@@ -34,7 +35,7 @@ export class RoomEditorComponent implements OnInit {
     lighting: this.lightingForm
   });
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.fillForm();
@@ -53,10 +54,16 @@ export class RoomEditorComponent implements OnInit {
   onSubmit() {
     const room = this.createRoom();
     this.accept.emit(room);
+    this.snackBar.open(room.name + ' has been successfully created!', 'Close', {
+      duration: 2000,
+    });
   }
 
   onDelete() {
     this.delete.emit();
+    this.snackBar.open(this.room.name + ' has been deleted!', 'Close', {
+      duration: 2000,
+    });
   }
 
   createRoom(): Room {
