@@ -1,0 +1,33 @@
+<mat-expansion-panel class=panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{room ? room.name : 'Add new room!'}}
+      </mat-panel-title>
+      <mat-panel-description class=header-icons>
+        <button mat-icon-button *ngIf="room" (click)="onDelete()" class=header-icon>
+            <mat-icon>delete</mat-icon>
+        </button>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form class=form-container [formGroup]="form" (submit)="onSubmit()">
+      <mat-form-field class=input>
+          <input matInput placeholder="Name" [formControl]="nameForm">
+      </mat-form-field>
+      <mat-form-field class=input>
+          <input matInput placeholder="Surface" [formControl]="surfaceForm">
+      </mat-form-field>
+      <mat-form-field class=input>
+          <input matInput placeholder="Cubature" [formControl]="cubatureForm">
+      </mat-form-field>
+      <mat-form-field class=input>
+          <input matInput placeholder="Heating" [formControl]="heatingForm">
+      </mat-form-field>
+      <mat-form-field class=input>
+          <input matInput placeholder="Lighting" [formControl]="lightingForm">
+      </mat-form-field>
+    </form>
+    <mat-action-row *ngIf="!isNew">
+        <button mat-button (click)="onSubmit()">Accept</button>
+    </mat-action-row>
+  </mat-expansion-panel>

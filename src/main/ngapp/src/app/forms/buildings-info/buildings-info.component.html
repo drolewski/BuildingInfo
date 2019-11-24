@@ -1,0 +1,9 @@
+
+<mat-card class=card *ngIf="(buildings$ | async) as buildings">
+  <mat-card-title>
+    Buildings Info
+  </mat-card-title>
+  <mat-accordion>
+    <app-building-info [building]="b" *ngFor="let b of buildings"></app-building-info>
+  </mat-accordion>
+</mat-card>

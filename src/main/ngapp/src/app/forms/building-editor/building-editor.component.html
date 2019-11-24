@@ -1,0 +1,24 @@
+<mat-expansion-panel class=panel [formGroup]="form">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{isNew ? "Add new building" : building.name}}
+      </mat-panel-title>
+      <mat-panel-description class=header-icons>
+        <button mat-icon-button *ngIf="!isNew" (click)="onDelete()" class=header-icon>
+            <mat-icon>delete</mat-icon>
+        </button>
+      </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-form-field>
+      <input matInput placeholder="Name" [formControl]="nameForm">
+  </mat-form-field>
+  <mat-accordion>
+      <app-level-editor (delete)="deleteLevel(i)" #levelEditor [level]="l" [parentFormArray]="levelsForm" *ngFor="let l of building.immoveables; let i = index"></app-level-editor>
+      <app-level-editor (accept)="addLevel($event)" [parentFormArray]="levelsForm"></app-level-editor>
+  </mat-accordion>
+
+  <mat-action-row>
+      <button mat-button (click)="onSubmit()">Save</button>
+  </mat-action-row>
+</mat-expansion-panel>
