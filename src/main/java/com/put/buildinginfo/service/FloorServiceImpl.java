@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FloorServiceImpl implements  FloorService{
@@ -163,7 +164,7 @@ public class FloorServiceImpl implements  FloorService{
             return refactorFloorDbToLevel(floorDb.getFloorId());
         }
         logger.debug("Given level does not exist: " + level);
-        return null;
+        return saveNewFloor(level);
     }
 
     @Override
@@ -183,5 +184,20 @@ public class FloorServiceImpl implements  FloorService{
     public void deleteAll() {
         logger.debug("Delete all floors from db.");
         floorRepo.deleteAll();
+    }
+
+    @Override
+    public Level addRoom(int id, Room room) {
+        logger.debug("Add room:" + room + " to the building: " + id);
+        FloorDb floorDb = floorRepo.findById(id);
+        if(floorDb != null){
+            Room room1 = roomService.saveNewRoom(room);
+            List<Integer> floorDbs = floorDb.getRooms();
+            floorDbs.add(room1.getId());
+            floorDb.setRooms(floorDbs);
+            floorRepo.save(floorDb);
+            return refactorFloorDbToLevel(floorDb.getFloorId());
+        }
+        return null;
     }
 }
