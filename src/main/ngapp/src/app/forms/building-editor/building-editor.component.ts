@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { LevelEditorComponent } from '../level-editor/level-editor.component';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-building-editor',
@@ -12,7 +13,8 @@ import { BuildingsService } from 'src/app/services/buildings/buildings.service';
 })
 export class BuildingEditorComponent implements OnInit {
 
-  constructor(private buildingsService: BuildingsService) { }
+  constructor(private buildingsService: BuildingsService,
+              private snackBar: MatSnackBar) { }
 
   @Input()
   building: Building;
@@ -41,14 +43,23 @@ export class BuildingEditorComponent implements OnInit {
     const building = this.createBuilding();
     if (this.isNew) {
       this.buildingsService.createBuilding(building).subscribe();
+      this.snackBar.open(building.name + ' has been successfully created!', 'Close', {
+        duration: 2000,
+      });
     } else {
       console.log(building);
       this.buildingsService.updateBuilding(building).subscribe();
+      this.snackBar.open(building.name + ' has been successfully updated!', 'Close', {
+        duration: 2000,
+      });
     }
   }
 
   onDelete() {
     this.buildingsService.deleteBuilding(this.building).subscribe();
+    this.snackBar.open(this.building.name + ' has been deleted!', 'Close', {
+      duration: 2000,
+    });
   }
 
   createBuilding(): Building {

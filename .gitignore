@@ -65,4 +65,4 @@ hs_err_pid*
 
 # Angular #
 node_modules
-webapp
+src/main/webapp/*
