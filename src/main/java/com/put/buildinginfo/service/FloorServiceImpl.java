@@ -164,7 +164,7 @@ public class FloorServiceImpl implements  FloorService{
             return refactorFloorDbToLevel(floorDb.getFloorId());
         }
         logger.debug("Given level does not exist: " + level);
-        return null;
+        return saveNewFloor(level);
     }
 
     @Override
