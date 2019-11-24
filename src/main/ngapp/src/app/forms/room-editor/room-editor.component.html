@@ -27,7 +27,7 @@
           <input matInput placeholder="Lighting" [formControl]="lightingForm">
       </mat-form-field>
     </form>
-    <mat-action-row *ngIf="!isNew">
+    <mat-action-row *ngIf="!room">
         <button mat-button (click)="onSubmit()">Accept</button>
     </mat-action-row>
   </mat-expansion-panel>
