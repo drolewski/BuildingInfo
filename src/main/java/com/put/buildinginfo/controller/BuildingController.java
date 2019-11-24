@@ -100,7 +100,12 @@ public class BuildingController {
 
     @PutMapping("/{id}/addLevel")
     public Building addNewLevel(@PathVariable int id,  @RequestBody Level level){
-        return buildingService.addLevel(id, level);
+        logger.info("[PUT] - /"+id+"/addLevel");
+        Building building = buildingService.addLevel(id, level);
+        if(building != null){
+            return building;
+        }
+        throw new ImmovableNotFound(BUILDING_NOT_FOUND + id);
     }
 
 }
