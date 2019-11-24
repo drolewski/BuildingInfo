@@ -110,7 +110,10 @@ public class BuildingServiceImpl implements  BuildingService{
         logger.debug("Calculate complete heating of building: " + id);
         if(buildingRepo.findById(id) != null) {
             Building building = refactorBuildingDbToBuilding(id);
-            return (building.calculateHeating()/building.calculateCubature());
+            float cubature = building.calculateCubature();
+            if(cubature != 0) {
+                return (building.calculateHeating() / cubature);
+            }
         }
         logger.info("Cannot calculate heating: "+ id);
         return -1f;
@@ -121,7 +124,10 @@ public class BuildingServiceImpl implements  BuildingService{
         logger.debug("Calculate complete lighting of building: " + id);
         if (buildingRepo.findById(id) != null) {
             Building building = refactorBuildingDbToBuilding(id);
-            return (building.calculateLighting()/building.calculateSurface());
+            float surface = building.calculateSurface();
+            if(surface != 0) {
+                return (building.calculateLighting() / surface);
+            }
         }
         logger.info("Cannot calculate lighting: "+ id);
         return -1f;

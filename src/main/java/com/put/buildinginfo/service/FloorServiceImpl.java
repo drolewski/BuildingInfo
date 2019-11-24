@@ -119,7 +119,10 @@ public class FloorServiceImpl implements  FloorService{
         logger.debug("Calculate heating of the level: " + id);
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
-            return (level.calculateHeating()/level.calculateCubature());
+            float cubature = level.calculateCubature();
+            if(cubature != 0) {
+                return (level.calculateHeating() / level.calculateCubature());
+            }
         }
         logger.info("Cannot calculate heating: "+ id);
         return -1f;
@@ -130,7 +133,10 @@ public class FloorServiceImpl implements  FloorService{
         logger.debug("Calculate lighting of the level: " + id);
         if (floorRepo.findById(id) != null) {
             Level level = refactorFloorDbToLevel(id);
-            return (level.calculateLighting()/level.calculateSurface());
+            float surface = level.calculateSurface();
+            if(surface != 0) {
+                return (level.calculateLighting() / level.calculateSurface());
+            }
         }
         logger.info("Cannot calculate lighting: "+ id);
         return -1f;
