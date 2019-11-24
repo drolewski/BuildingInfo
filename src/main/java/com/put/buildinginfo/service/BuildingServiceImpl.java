@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BuildingServiceImpl implements  BuildingService{
@@ -160,5 +161,20 @@ public class BuildingServiceImpl implements  BuildingService{
     public void deleteAll() {
         logger.debug("Delete all buildings");
         buildingRepo.deleteAll();
+    }
+
+    @Override
+    public Building addLevel(int id, Level level) {
+        logger.debug("Add floor:" + level + " to the building: " + id);
+        BuildingDb buildingDb = buildingRepo.findById(id);
+        if(buildingDb != null) {
+            Level level1 = floorService.saveNewFloor(level);
+            List<Integer> buildingDbs = buildingDb.getFloors();
+            buildingDbs.add(level1.getId());
+            buildingDb.setFloors(buildingDbs);
+            buildingRepo.save(buildingDb);
+            return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
+        }
+        return null;
     }
 }

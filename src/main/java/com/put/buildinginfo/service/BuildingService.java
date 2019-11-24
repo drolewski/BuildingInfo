@@ -1,6 +1,7 @@
 package com.put.buildinginfo.service;
 
 import com.put.buildinginfo.applicationArchitecture.Building;
+import com.put.buildinginfo.applicationArchitecture.Level;
 
 import java.util.ArrayList;
 
@@ -17,4 +18,5 @@ public interface BuildingService {
     void deleteById(int id);
     Building updateBuilding(Building building);
     void deleteAll();
+    Building addLevel(int id, Level level);
 }

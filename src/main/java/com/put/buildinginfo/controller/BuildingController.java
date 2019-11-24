@@ -1,24 +1,15 @@
 package com.put.buildinginfo.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.put.buildinginfo.applicationArchitecture.Building;
 import com.put.buildinginfo.applicationArchitecture.Level;
 import com.put.buildinginfo.exception.ImmovableNotFound;
 import com.put.buildinginfo.service.BuildingServiceImpl;
-import com.put.buildinginfo.service.FloorServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("building")
@@ -107,6 +98,14 @@ public class BuildingController {
         return buildingService.updateBuilding(building);
     }
 
-
+    @PutMapping("/{id}/addLevel")
+    public Building addNewLevel(@PathVariable int id,  @RequestBody Level level){
+        logger.info("[PUT] - /"+id+"/addLevel");
+        Building building = buildingService.addLevel(id, level);
+        if(building != null){
+            return building;
+        }
+        throw new ImmovableNotFound(BUILDING_NOT_FOUND + id);
+    }
 
 }

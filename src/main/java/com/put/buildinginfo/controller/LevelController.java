@@ -97,4 +97,14 @@ public class LevelController {
     }
 
 
+    @PutMapping("/{id}/addRoom")
+    public Level addRoomToFloor(@PathVariable int id, @RequestBody Room room){
+        logger.info("[PUT] - /"+id+"/addRoom");
+        Level level = floorService.addRoom(id, room);
+        if(level != null){
+            return level;
+        }
+        throw new ImmovableNotFound(LEVEL_NOT_FOUND + id);
+    }
+
 }

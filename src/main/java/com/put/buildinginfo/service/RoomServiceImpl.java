@@ -132,7 +132,7 @@ public class RoomServiceImpl implements RoomService {
             roomRepo.save(roomDb);
             return refactorRoomDbToRoom(roomDb.getRoomId());
         }
-        return null;
+        return saveNewRoom(room);
     }
 
     @Override
