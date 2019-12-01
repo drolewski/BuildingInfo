@@ -62,3 +62,7 @@ hs_err_pid*
 # Maven #
 /log
 /target
+
+# Angular #
+node_modules
+src/main/webapp/*
