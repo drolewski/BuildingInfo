@@ -2,6 +2,7 @@ package com.put.buildinginfo.applicationArchitecture;
 
 import java.util.ArrayList;
 
+
 /**
  * The type Composite.
  *
@@ -22,6 +23,7 @@ public class Composite<T extends Immovable> extends Immovable{
         this.immoveables = immoveables;
     }
 
+
     /**
      * Add.
      *
@@ -34,6 +36,7 @@ public class Composite<T extends Immovable> extends Immovable{
         immoveables.add(t);
     }
 
+
     /**
      * Remove.
      *
@@ -45,6 +48,7 @@ public class Composite<T extends Immovable> extends Immovable{
         }
         immoveables.remove(t.getId());
     }
+
 
     /**
      * Modify. (It actually replace the old immovables.)
@@ -74,6 +78,7 @@ public class Composite<T extends Immovable> extends Immovable{
         this.immoveables = immoveables;
     }
 
+
     /**
      * Calculate the surface.
      *
@@ -86,6 +91,7 @@ public class Composite<T extends Immovable> extends Immovable{
         }
         return surfaceSum;
     }
+
 
     /**
      * Calculate the cubature float.
@@ -112,6 +118,7 @@ public class Composite<T extends Immovable> extends Immovable{
         }
         return lighting;
     }
+
 
     /**
      * Calculate the heating.

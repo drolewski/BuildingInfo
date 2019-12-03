@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+
 /**
  * The type Building data base.
  */
@@ -57,6 +58,7 @@ public class BuildingDb {
         return buildingId;
     }
 
+
     /**
      * Sets the building identifier.
      *
@@ -92,6 +94,7 @@ public class BuildingDb {
     public List<Integer> getFloors() {
         return floors;
     }
+
 
     /**
      * Sets the building floors.

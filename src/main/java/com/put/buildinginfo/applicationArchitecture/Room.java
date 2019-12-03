@@ -1,5 +1,6 @@
 package com.put.buildinginfo.applicationArchitecture;
 
+
 /**
  * The type Room.
  */

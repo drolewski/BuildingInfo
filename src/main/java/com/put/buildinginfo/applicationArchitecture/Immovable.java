@@ -1,11 +1,13 @@
 package com.put.buildinginfo.applicationArchitecture;
 
+
 /**
  * The type Immovable.
  */
 public abstract class Immovable {
     private int id;
     private  String name;
+
 
     /**
      * Calculate the cubature.
@@ -51,6 +53,7 @@ public abstract class Immovable {
         this.id = id;
         this.name = name;
     }
+
 
     /**
      * Get the immovable identifier.

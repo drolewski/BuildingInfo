@@ -48,6 +48,7 @@ public class RoomDb {
         this.lightning = lightning;
     }
 
+
     /**
      * Instantiates a new Room data base.
      *

@@ -2,6 +2,7 @@ package com.put.buildinginfo.applicationArchitecture;
 
 import java.util.ArrayList;
 
+
 /**
  * The type Building.
  */
@@ -18,3 +19,4 @@ public class Building extends Composite<Level> {
         super(id, name, immoveables);
     }
 }
+
