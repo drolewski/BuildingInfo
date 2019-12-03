@@ -12,7 +12,7 @@
 	<groupId>com.put</groupId>
 	<artifactId>buildinginfo</artifactId>
 
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>buildinginfo</name>
 
 	<properties>
