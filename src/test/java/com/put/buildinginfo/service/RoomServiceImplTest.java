@@ -6,6 +6,7 @@ import com.put.buildinginfo.database.RoomRepo;
 import com.put.buildinginfo.exception.ImmovableNotFound;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 public class RoomServiceImplTest {
 
     RoomServiceImpl roomService;

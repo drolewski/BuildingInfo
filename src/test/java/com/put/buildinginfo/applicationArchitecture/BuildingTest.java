@@ -2,11 +2,13 @@ package com.put.buildinginfo.applicationArchitecture;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 public class BuildingTest {
 
     Building building;
