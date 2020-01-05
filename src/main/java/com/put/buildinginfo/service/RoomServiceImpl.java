@@ -105,7 +105,10 @@ public class RoomServiceImpl implements RoomService {
     public float getHeating(int id) {
         logger.debug("Calculate heating of room: " + id);
         if(roomRepo.findByRoomId(id) != null){
-            return (roomRepo.findByRoomId(id).getHeating()/roomRepo.findByRoomId(id).getCubature());
+            float heating = roomRepo.findByRoomId(id).getCubature();
+            if(heating != 0) {
+                return (roomRepo.findByRoomId(id).getHeating() / roomRepo.findByRoomId(id).getCubature());
+            }
         }
         return -1f;
     }
@@ -114,7 +117,10 @@ public class RoomServiceImpl implements RoomService {
     public float getLighting(int id) {
         logger.debug("Calculate lighting of room: " + id);
         if(roomRepo.findByRoomId(id) != null){
-            return (roomRepo.findByRoomId(id).getLightning()/roomRepo.findByRoomId(id).getSurface());
+            float surface = roomRepo.findByRoomId(id).getSurface();
+            if(surface != 0) {
+                return (roomRepo.findByRoomId(id).getLightning() / surface);
+            }
         }
         return -1f;
     }
