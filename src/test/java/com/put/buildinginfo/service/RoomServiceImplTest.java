@@ -100,9 +100,4 @@ public class RoomServiceImplTest {
         assertEquals(roomService.getHeating(11),150f/100.3f);
         assertEquals(roomService.getLighting(11),300f/25.6f);
     }
-
-    @Test
-    public void updateRoomsTest(){
-
-    }
 }
