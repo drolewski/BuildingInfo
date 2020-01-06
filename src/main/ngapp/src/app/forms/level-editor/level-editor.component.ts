@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChildren, QueryList, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { Room } from 'src/app/models/room';
 import { RoomEditorComponent } from '../room-editor/room-editor.component';
@@ -35,11 +35,11 @@ export class LevelEditorComponent implements OnInit {
 
   isNew: boolean;
 
-  nameForm = new FormControl('');
+  nameForm = new FormControl('', Validators.required);
   roomsForm = new FormArray([]);
   form = new FormGroup({
     name: this.nameForm,
-    levels: this.roomsForm
+    rooms: this.roomsForm
   });
 
 
@@ -47,9 +47,10 @@ export class LevelEditorComponent implements OnInit {
     this.isNew = this.level == null;
     if (!this.level) {
       this.level = new Level();
+    } else {
+      this.parentFormArray.push(this.form);
     }
     this.fillForm();
-    this.parentFormArray.push(this.form);
   }
 
   fillForm() {

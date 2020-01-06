@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Room } from 'src/app/models/room';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MatSnackBar, MatExpansionPanel } from '@angular/material';
 
 @Component({
@@ -13,6 +13,9 @@ export class RoomEditorComponent implements OnInit {
   @Input()
   room: Room;
 
+  @Input()
+  parentFormArray: FormArray;
+
   @ViewChild('panel', {static: true})
   panel: MatExpansionPanel;
 
@@ -22,14 +25,16 @@ export class RoomEditorComponent implements OnInit {
   @Output()
   delete: EventEmitter<void> = new EventEmitter();
 
+  readonly numberRegex = '[+-]?([0-9]*[.])?[0-9]+';
+
   isNew: boolean;
 
   // Reactive forms
-  nameForm = new FormControl('');
-  surfaceForm = new FormControl('');
-  cubatureForm = new FormControl('');
-  heatingForm = new FormControl('');
-  lightingForm = new FormControl('');
+  nameForm = new FormControl('', [Validators.required]);
+  surfaceForm = new FormControl('', [Validators.required, Validators.pattern(this.numberRegex)]);
+  cubatureForm = new FormControl('',  [Validators.required, Validators.pattern(this.numberRegex)]);
+  heatingForm = new FormControl('',  [Validators.required, Validators.pattern(this.numberRegex)]);
+  lightingForm = new FormControl('',  [Validators.required, Validators.pattern(this.numberRegex)]);
   form = new FormGroup({
     name: this.nameForm,
     surface: this.surfaceForm,
@@ -41,7 +46,10 @@ export class RoomEditorComponent implements OnInit {
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.fillForm();
+    if (this.room) {
+      this.fillForm();
+      this.parentFormArray.push(this.form);
+    }
   }
 
   fillForm() {

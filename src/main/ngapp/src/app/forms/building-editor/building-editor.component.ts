@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Building } from 'src/app/models/building';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { LevelEditorComponent } from '../level-editor/level-editor.component';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
@@ -24,7 +24,7 @@ export class BuildingEditorComponent implements OnInit {
 
   isNew: boolean;
 
-  nameForm = new FormControl('');
+  nameForm = new FormControl('', Validators.required);
   levelsForm = new FormArray([]);
   form = new FormGroup({
     name: this.nameForm,
