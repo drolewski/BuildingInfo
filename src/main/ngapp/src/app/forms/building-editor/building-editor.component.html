@@ -12,6 +12,9 @@
 
   <mat-form-field>
       <input matInput placeholder="Name" [formControl]="nameForm">
+      <mat-error *ngIf="nameForm.hasError('required')">
+        Name is required
+      </mat-error>
   </mat-form-field>
   <mat-accordion>
       <app-level-editor (delete)="deleteLevel(i)" #levelEditor [level]="l" [parentFormArray]="levelsForm" *ngFor="let l of building.immoveables; let i = index"></app-level-editor>
@@ -19,6 +22,6 @@
   </mat-accordion>
 
   <mat-action-row>
-      <button mat-button (click)="onSubmit()">Save</button>
+      <button mat-button (click)="onSubmit()" [disabled]="form.invalid">Save</button>
   </mat-action-row>
 </mat-expansion-panel>

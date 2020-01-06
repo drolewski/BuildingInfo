@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewChildren, QueryList, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, ViewChildren, QueryList, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { Room } from 'src/app/models/room';
 import { RoomEditorComponent } from '../room-editor/room-editor.component';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatExpansionPanel } from '@angular/material';
 
 @Component({
   selector: 'app-level-editor',
@@ -17,6 +17,9 @@ export class LevelEditorComponent implements OnInit {
 
   @Input()
   level: Level;
+
+  @ViewChild('panel', {static: true})
+  panel: MatExpansionPanel;
 
   @Input()
   parentFormArray: FormArray;
@@ -32,11 +35,11 @@ export class LevelEditorComponent implements OnInit {
 
   isNew: boolean;
 
-  nameForm = new FormControl('');
+  nameForm = new FormControl('', Validators.required);
   roomsForm = new FormArray([]);
   form = new FormGroup({
     name: this.nameForm,
-    levels: this.roomsForm
+    rooms: this.roomsForm
   });
 
 
@@ -44,9 +47,10 @@ export class LevelEditorComponent implements OnInit {
     this.isNew = this.level == null;
     if (!this.level) {
       this.level = new Level();
+    } else {
+      this.parentFormArray.push(this.form);
     }
     this.fillForm();
-    this.parentFormArray.push(this.form);
   }
 
   fillForm() {
@@ -59,6 +63,8 @@ export class LevelEditorComponent implements OnInit {
     this.snackBar.open(level.name + ' has been successfully created!', 'Close', {
       duration: 2000,
     });
+    this.form.reset();
+    this.panel.close();
   }
 
   onDelete() {

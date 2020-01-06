@@ -517,14 +517,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_models_building__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/building */ "./src/app/models/building.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+
 
 
 
 
 
 let BuildingEditorComponent = class BuildingEditorComponent {
-    constructor(buildingsService) {
+    constructor(buildingsService, snackBar) {
         this.buildingsService = buildingsService;
+        this.snackBar = snackBar;
         this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('');
         this.levelsForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormArray"]([]);
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -543,14 +546,23 @@ let BuildingEditorComponent = class BuildingEditorComponent {
         const building = this.createBuilding();
         if (this.isNew) {
             this.buildingsService.createBuilding(building).subscribe();
+            this.snackBar.open(building.name + ' has been successfully created!', 'Close', {
+                duration: 2000,
+            });
         }
         else {
             console.log(building);
             this.buildingsService.updateBuilding(building).subscribe();
+            this.snackBar.open(building.name + ' has been successfully updated!', 'Close', {
+                duration: 2000,
+            });
         }
     }
     onDelete() {
         this.buildingsService.deleteBuilding(this.building).subscribe();
+        this.snackBar.open(this.building.name + ' has been deleted!', 'Close', {
+            duration: 2000,
+        });
     }
     createBuilding() {
         const building = new src_app_models_building__WEBPACK_IMPORTED_MODULE_2__["Building"]();
@@ -572,7 +584,8 @@ let BuildingEditorComponent = class BuildingEditorComponent {
     }
 };
 BuildingEditorComponent.ctorParameters = () => [
-    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__["BuildingsService"] }
+    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__["BuildingsService"] },
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -787,15 +800,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var src_app_models_level__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/models/level */ "./src/app/models/level.ts");
-/* harmony import */ var src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/buildings/buildings.service */ "./src/app/services/buildings/buildings.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 
 
 
 
 
 let LevelEditorComponent = class LevelEditorComponent {
-    constructor(buildingsService) {
-        this.buildingsService = buildingsService;
+    constructor(snackBar) {
+        this.snackBar = snackBar;
         this.accept = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.nameForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
@@ -817,10 +830,17 @@ let LevelEditorComponent = class LevelEditorComponent {
         this.nameForm.setValue(this.level.name);
     }
     onSubmit() {
-        this.accept.emit(this.createLevel());
+        const level = this.createLevel();
+        this.accept.emit(level);
+        this.snackBar.open(level.name + ' has been successfully created!', 'Close', {
+            duration: 2000,
+        });
     }
     onDelete() {
         this.delete.emit();
+        this.snackBar.open(this.level.name + ' has been deleted!', 'Close', {
+            duration: 2000,
+        });
     }
     createLevel() {
         const level = new src_app_models_level__WEBPACK_IMPORTED_MODULE_3__["Level"]();
@@ -838,7 +858,7 @@ let LevelEditorComponent = class LevelEditorComponent {
     }
 };
 LevelEditorComponent.ctorParameters = () => [
-    { type: src_app_services_buildings_buildings_service__WEBPACK_IMPORTED_MODULE_4__["BuildingsService"] }
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -894,12 +914,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_models_room__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/room */ "./src/app/models/room.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+
 
 
 
 
 let RoomEditorComponent = class RoomEditorComponent {
-    constructor() {
+    constructor(snackBar) {
+        this.snackBar = snackBar;
         this.accept = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         // Reactive forms
@@ -931,9 +954,15 @@ let RoomEditorComponent = class RoomEditorComponent {
     onSubmit() {
         const room = this.createRoom();
         this.accept.emit(room);
+        this.snackBar.open(room.name + ' has been successfully created!', 'Close', {
+            duration: 2000,
+        });
     }
     onDelete() {
         this.delete.emit();
+        this.snackBar.open(this.room.name + ' has been deleted!', 'Close', {
+            duration: 2000,
+        });
     }
     createRoom() {
         const room = new src_app_models_room__WEBPACK_IMPORTED_MODULE_2__["Room"]();
@@ -945,6 +974,9 @@ let RoomEditorComponent = class RoomEditorComponent {
         return room;
     }
 };
+RoomEditorComponent.ctorParameters = () => [
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], RoomEditorComponent.prototype, "room", void 0);
@@ -1092,6 +1124,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm2015/button.js");
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm2015/icon.js");
 /* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
+
 
 
 
@@ -1117,7 +1151,8 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_divider__WEBPACK_IMPORTED_MODULE_7__["MatDividerModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
-            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"]
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"],
+            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_11__["MatSnackBarModule"]
         ],
         exports: [
             _angular_material_card__WEBPACK_IMPORTED_MODULE_3__["MatCardModule"],
@@ -1127,7 +1162,8 @@ MaterialModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_divider__WEBPACK_IMPORTED_MODULE_7__["MatDividerModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
-            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"]
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_10__["MatTableModule"],
+            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_11__["MatSnackBarModule"]
         ]
     })
 ], MaterialModule);

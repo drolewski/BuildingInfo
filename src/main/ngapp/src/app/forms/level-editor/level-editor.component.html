@@ -1,4 +1,4 @@
-<mat-expansion-panel class=panel>
+<mat-expansion-panel class=panel #panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{isNew ? "Add new Level" : level.name}}
@@ -13,14 +13,17 @@
     <form [formGroup]="form">
         <mat-form-field>
             <input matInput placeholder="Name" [formControl]="nameForm">
+            <mat-error *ngIf="nameForm.hasError('required')">
+              Name is required
+            </mat-error>
         </mat-form-field>
         <mat-accordion>
 
-          <app-room-editor #roomEditor (delete)="deleteRoom(i)" [room]="r" *ngFor="let r of level.immoveables; let i = index"></app-room-editor>
+          <app-room-editor #roomEditor (delete)="deleteRoom(i)" [room]="r" [parentFormArray]="roomsForm" *ngFor="let r of level.immoveables; let i = index"></app-room-editor>
           <app-room-editor (accept)="addRoom($event)"></app-room-editor>
         </mat-accordion>
     </form>
     <mat-action-row *ngIf="isNew">
-        <button mat-button (click)="onSubmit()">Accept</button>
+        <button mat-button (click)="onSubmit()" [disabled]="form.invalid">Accept</button>
     </mat-action-row>
   </mat-expansion-panel>

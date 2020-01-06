@@ -13,6 +13,8 @@ import { RoomEditorComponent } from './forms/room-editor/room-editor.component';
 import { LevelEditorComponent } from './forms/level-editor/level-editor.component';
 import { BuildingsInfoComponent } from './forms/buildings-info/buildings-info.component';
 import { BuildingInfoComponent } from './forms/building-info/building-info.component';
+import { LevelInfoComponent } from './forms/level-info/level-info.component';
+import { RoomInfoComponent } from './forms/room-info/room-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BuildingInfoComponent } from './forms/building-info/building-info.compo
     RoomEditorComponent,
     LevelEditorComponent,
     BuildingsInfoComponent,
-    BuildingInfoComponent
+    BuildingInfoComponent,
+    LevelInfoComponent,
+    RoomInfoComponent
   ],
   imports: [
     // Angular modules

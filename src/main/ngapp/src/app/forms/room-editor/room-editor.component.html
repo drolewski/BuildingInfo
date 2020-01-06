@@ -1,4 +1,4 @@
-<mat-expansion-panel class=panel>
+<mat-expansion-panel class=panel #panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
           {{room ? room.name : 'Add new room!'}}
@@ -13,21 +13,48 @@
     <form class=form-container [formGroup]="form" (submit)="onSubmit()">
       <mat-form-field class=input>
           <input matInput placeholder="Name" [formControl]="nameForm">
+          <mat-error *ngIf="nameForm.hasError('required')">
+            Name is required
+          </mat-error>
       </mat-form-field>
       <mat-form-field class=input>
           <input matInput placeholder="Surface" [formControl]="surfaceForm">
+          <mat-error *ngIf="surfaceForm.hasError('required')">
+            Surface is required
+          </mat-error>
+          <mat-error *ngIf="surfaceForm.hasError('pattern')">
+            Please enter a valid number
+          </mat-error>
       </mat-form-field>
       <mat-form-field class=input>
           <input matInput placeholder="Cubature" [formControl]="cubatureForm">
+          <mat-error *ngIf="cubatureForm.hasError('required')">
+            Cubature is required
+          </mat-error>
+          <mat-error *ngIf="cubatureForm.hasError('pattern')">
+            Please enter a valid number
+          </mat-error>
       </mat-form-field>
       <mat-form-field class=input>
           <input matInput placeholder="Heating" [formControl]="heatingForm">
+          <mat-error *ngIf="heatingForm.hasError('required')">
+            Heating is required
+          </mat-error>
+          <mat-error *ngIf="heatingForm.hasError('pattern')">
+            Please enter a valid number
+          </mat-error>
       </mat-form-field>
       <mat-form-field class=input>
           <input matInput placeholder="Lighting" [formControl]="lightingForm">
+          <mat-error *ngIf="lightingForm.hasError('required')">
+            Lighting is required
+          </mat-error>
+          <mat-error *ngIf="lightingForm.hasError('pattern')">
+            Please enter a valid number
+          </mat-error>
       </mat-form-field>
     </form>
     <mat-action-row *ngIf="!room">
-        <button mat-button (click)="onSubmit()">Accept</button>
+        <button mat-button (click)="onSubmit()" [disabled]="form.invalid">Accept</button>
     </mat-action-row>
   </mat-expansion-panel>
