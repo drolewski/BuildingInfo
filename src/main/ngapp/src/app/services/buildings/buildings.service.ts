@@ -54,12 +54,6 @@ export class BuildingsService {
     })) as Observable<void>;
   }
 
-  public deleteLevel(level: Level): Observable<void> {
-    return this.http.delete('/level/' + level.id).pipe(tap(() => {
-      this.updateBuildings$();
-    })) as Observable<void>;
-  }
-
   private updateBuildings$() {
     this.http.get('/building').subscribe((result: Building[]) => {
       this.buildings$.next(result);

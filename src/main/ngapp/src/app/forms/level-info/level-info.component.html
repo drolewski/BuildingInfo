@@ -1,6 +1,6 @@
 <mat-expansion-panel class=panel>
   <mat-expansion-panel-header>
-    {{building.name}}
+    {{level.name}}
   </mat-expansion-panel-header>
 
   <table mat-table [dataSource]="data" class=table>
@@ -19,7 +19,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <ng-container *ngFor="let level of building.immoveables">
-    <app-level-info *ngIf="level.id != 0" [level]="level"></app-level-info>
+
+  <ng-container *ngFor="let room of level.immoveables">
+    <app-room-info *ngIf="room.id != 0" [room]="room"></app-room-info>
   </ng-container>
 </mat-expansion-panel>

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Room } from 'src/app/models/room';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatExpansionPanel } from '@angular/material';
 
 @Component({
   selector: 'app-room-editor',
@@ -12,6 +12,9 @@ export class RoomEditorComponent implements OnInit {
 
   @Input()
   room: Room;
+
+  @ViewChild('panel', {static: true})
+  panel: MatExpansionPanel;
 
   @Output()
   accept: EventEmitter<Room> = new EventEmitter();
@@ -57,6 +60,8 @@ export class RoomEditorComponent implements OnInit {
     this.snackBar.open(room.name + ' has been successfully created!', 'Close', {
       duration: 2000,
     });
+    this.form.reset();
+    this.panel.close();
   }
 
   onDelete() {

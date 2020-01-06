@@ -2,11 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
 import { Building } from 'src/app/models/building';
-
-export interface TableElement {
-  name: string;
-  value: Observable<number>;
-}
+import { TableElement } from 'src/app/models/table-element';
 
 @Component({
   selector: 'app-building-info',
