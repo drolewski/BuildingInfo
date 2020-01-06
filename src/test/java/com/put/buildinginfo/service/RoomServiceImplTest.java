@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class RoomServiceImplTest {
@@ -46,6 +45,12 @@ public class RoomServiceImplTest {
         when(roomRepo.findByRoomId(1)).thenReturn(new RoomDb(1, "test", 25.6f, 100.3f, 150f, 300f));
         Room result = new Room(1, "test", 25.6f, 100.3f, 150f, 300f);
         assertEquals(result.getName(), roomService.getRoomById(1).getName());
+    }
+
+    @Test
+    public void getRoomByIdNullTest(){
+        when(roomRepo.findByRoomId(1)).thenReturn(null);
+        assertNull(roomService.getRoomById(1));
     }
 
     @Test
