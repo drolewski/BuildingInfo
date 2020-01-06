@@ -1,6 +1,7 @@
 package com.put.buildinginfo.controller;
 
 import com.put.buildinginfo.applicationArchitecture.Building;
+import com.put.buildinginfo.applicationArchitecture.Immovable;
 import com.put.buildinginfo.applicationArchitecture.Level;
 import com.put.buildinginfo.exception.ImmovableNotFound;
 import com.put.buildinginfo.service.BuildingServiceImpl;
@@ -108,4 +109,9 @@ public class BuildingController {
         throw new ImmovableNotFound(BUILDING_NOT_FOUND + id);
     }
 
+    @GetMapping("/{id}/heatingOver/{value}")
+    public ArrayList<Immovable> getSpaceWithHeatingOverGivenValue(@PathVariable int id,
+                                                                  @PathVariable float value){
+        return buildingService.getOverHeating(id, value);
+    }
 }

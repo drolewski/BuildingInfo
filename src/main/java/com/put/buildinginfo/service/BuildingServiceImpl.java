@@ -1,7 +1,9 @@
 package com.put.buildinginfo.service;
 
 import com.put.buildinginfo.applicationArchitecture.Building;
+import com.put.buildinginfo.applicationArchitecture.Immovable;
 import com.put.buildinginfo.applicationArchitecture.Level;
+import com.put.buildinginfo.applicationArchitecture.Room;
 import com.put.buildinginfo.database.BuildingDb;
 import com.put.buildinginfo.database.BuildingRepo;
 import org.slf4j.Logger;
@@ -174,6 +176,28 @@ public class BuildingServiceImpl implements  BuildingService{
             buildingDb.setFloors(buildingDbs);
             buildingRepo.save(buildingDb);
             return refactorBuildingDbToBuilding(buildingDb.getBuildingId());
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Immovable> getOverHeating(int id, float value) {
+        logger.debug("Get building: " + id + "with heating over: " + value);
+        BuildingDb buildingDb = buildingRepo.findById(id);
+        ArrayList<Immovable> immovables = new ArrayList<>();
+        if(buildingDb != null){
+            for(Integer floorid : buildingDb.getFloors()){
+                Level level = floorService.getFloorById(floorid);
+                if(level.calculateHeating() > value){
+                    immovables.add(level);
+                }
+                for(Room room : level.getImmoveables()){
+                    if(room.calculateHeating() > value){
+                        immovables.add(room);
+                    }
+                }
+            }
+            return immovables;
         }
         return null;
     }
