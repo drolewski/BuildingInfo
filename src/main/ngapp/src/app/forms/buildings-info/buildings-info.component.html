@@ -3,7 +3,74 @@
   <mat-card-title>
     Buildings Info
   </mat-card-title>
-  <mat-accordion>
-    <app-building-info [building]="b" *ngFor="let b of buildings"></app-building-info>
-  </mat-accordion>
+  <mat-card-content>
+    <mat-slide-toggle (change)="filterToggle($event)">Use filter</mat-slide-toggle>
+    <form *ngIf="useFilter" [formGroup]="filterForm">
+      <table class=filter-table>
+        <tr>
+          <td>
+            Surface:
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Min" formControlName="minSurface">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Max" formControlName="maxSurface">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Cubature:
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Min" formControlName="minCubature">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Max" formControlName="maxCubature">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Heating:
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Min" formControlName="minHeating">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Max" formControlName="maxHeating">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Lighting:
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Min" formControlName="minLighting">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Max" formControlName="maxLighting">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <mat-accordion>
+      <app-building-info [building]="b" [filter]="filter" *ngFor="let b of buildings"></app-building-info>
+    </mat-accordion>
+  </mat-card-content>
 </mat-card>
