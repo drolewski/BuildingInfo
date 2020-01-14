@@ -116,6 +116,7 @@ public class BuildingServiceImpl implements  BuildingService{
             if(cubature != 0) {
                 return (building.calculateHeating() / cubature);
             }
+            return 0;
         }
         logger.info("Cannot calculate heating: "+ id);
         return -1f;
@@ -130,6 +131,7 @@ public class BuildingServiceImpl implements  BuildingService{
             if(surface != 0) {
                 return (building.calculateLighting() / surface);
             }
+            return 0;
         }
         logger.info("Cannot calculate lighting: "+ id);
         return -1f;
