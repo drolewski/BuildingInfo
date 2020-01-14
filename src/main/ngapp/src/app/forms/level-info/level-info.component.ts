@@ -29,6 +29,7 @@ export class LevelInfoComponent implements OnInit {
   }
 
   initData() {
+    console.log(this.level);
     this.data$ = forkJoin([
       this.levelService.getSurface(this.level),
       this.levelService.getCubature(this.level),

@@ -112,6 +112,7 @@ public class BuildingController {
     @GetMapping("/{id}/heatingOver/{value}")
     public ArrayList<Immovable> getSpaceWithHeatingOverGivenValue(@PathVariable int id,
                                                                   @PathVariable float value){
+        logger.info("here i am");
         return buildingService.getOverHeating(id, value);
     }
 }

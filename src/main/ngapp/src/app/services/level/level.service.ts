@@ -15,14 +15,14 @@ export class LevelService {
   }
 
   public getCubature(level: Level): Observable<number> {
-    return this.http.get<number>('/room/cubature/' + level.id);
+    return this.http.get<number>('/level/cubature/' + level.id);
   }
 
   public getLighting(level: Level): Observable<number> {
-    return this.http.get<number>('/room/lighting/' + level.id);
+    return this.http.get<number>('/level/lighting/' + level.id);
   }
 
   public getHeating(level: Level): Observable<number> {
-    return this.http.get<number>('/room/heating/' + level.id);
+    return this.http.get<number>('/level/heating/' + level.id);
   }
 }

@@ -123,6 +123,7 @@ public class FloorServiceImpl implements  FloorService{
             if(cubature != 0) {
                 return (level.calculateHeating() / level.calculateCubature());
             }
+            return 0f;
         }
         logger.info("Cannot calculate heating: "+ id);
         return -1f;
@@ -137,6 +138,7 @@ public class FloorServiceImpl implements  FloorService{
             if(surface != 0) {
                 return (level.calculateLighting() / level.calculateSurface());
             }
+            return 0f;
         }
         logger.info("Cannot calculate lighting: "+ id);
         return -1f;
