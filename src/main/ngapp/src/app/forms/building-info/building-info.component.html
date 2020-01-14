@@ -2,7 +2,6 @@
   <mat-expansion-panel-header>
     {{building.name}}
   </mat-expansion-panel-header>
-
   <table mat-table [dataSource]="data" [ngClass]="shouldBeMarked(data) ? 'mark': 'panel'" class=table>
     <!-- Name Column -->
     <ng-container matColumnDef="name">

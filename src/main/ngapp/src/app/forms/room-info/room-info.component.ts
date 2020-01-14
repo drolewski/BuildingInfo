@@ -29,6 +29,7 @@ export class RoomInfoComponent implements OnInit {
   }
 
   initData() {
+    console.log(this.room);
     this.data$ = forkJoin([
       this.roomService.getSurface(this.room),
       this.roomService.getCubature(this.room),
