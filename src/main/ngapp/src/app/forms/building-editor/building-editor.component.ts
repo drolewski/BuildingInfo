@@ -57,7 +57,6 @@ export class BuildingEditorComponent implements OnInit {
     }
     this.form.reset();
     this.panel.close();
-    this.building.immoveables = [];
   }
 
   onDelete() {

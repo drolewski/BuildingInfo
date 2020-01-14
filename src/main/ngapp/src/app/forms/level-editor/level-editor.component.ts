@@ -64,7 +64,6 @@ export class LevelEditorComponent implements OnInit {
       duration: 2000,
     });
     this.form.reset();
-    this.level.immoveables = [];
     this.panel.close();
   }
 
