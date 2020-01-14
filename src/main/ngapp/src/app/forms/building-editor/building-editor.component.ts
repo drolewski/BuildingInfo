@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Level } from 'src/app/models/level';
 import { LevelEditorComponent } from '../level-editor/level-editor.component';
 import { BuildingsService } from 'src/app/services/buildings/buildings.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatExpansionPanel } from '@angular/material';
 
 @Component({
   selector: 'app-building-editor',
@@ -18,6 +18,9 @@ export class BuildingEditorComponent implements OnInit {
 
   @Input()
   building: Building;
+
+  @ViewChild('panel', {static: true})
+  panel: MatExpansionPanel;
 
   @ViewChildren('levelEditor')
   levelEditorComponents: QueryList<LevelEditorComponent>;
@@ -47,12 +50,14 @@ export class BuildingEditorComponent implements OnInit {
         duration: 2000,
       });
     } else {
-      console.log(building);
       this.buildingsService.updateBuilding(building).subscribe();
       this.snackBar.open(building.name + ' has been successfully updated!', 'Close', {
         duration: 2000,
       });
     }
+    this.form.reset();
+    this.panel.close();
+    this.building.immoveables = [];
   }
 
   onDelete() {
