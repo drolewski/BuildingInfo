@@ -12,28 +12,28 @@ public abstract class Immovable {
     /**
      * Calculate the cubature.
      *
-     * @return the float
+     * @return the cubature value
      */
     public abstract float calculateCubature();
 
     /**
      * Calculate the surface.
      *
-     * @return the float
+     * @return the surface value
      */
     public abstract float calculateSurface();
 
     /**
      * Calculate the lighting.
      *
-     * @return the float
+     * @return the lighting value
      */
     public abstract float calculateLighting();
 
     /**
      * Calculate the heating.
      *
-     * @return the float
+     * @return the heating value
      */
     public abstract float calculateHeating();
 

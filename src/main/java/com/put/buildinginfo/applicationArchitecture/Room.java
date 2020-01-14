@@ -127,7 +127,7 @@ public class Room extends Immovable {
     /**
      * Calculate the room lighting.
      *
-     * @return the float. The value will always be non-negative.
+     * @return the lighting. The value will always be non-negative.
      */
     public float calculateLighting(){
         return this.lighting;
