@@ -86,6 +86,9 @@ public class Composite<T extends Immovable> extends Immovable{
      */
     public float calculateSurface(){
         float surfaceSum = 0f;
+        if(immoveables == null){
+            return 0f;
+        }
         for(T o : immoveables){
             surfaceSum += o.calculateSurface();
         }
@@ -100,6 +103,9 @@ public class Composite<T extends Immovable> extends Immovable{
      */
     public float calculateCubature(){
         float cubatureSum = 0f;
+        if(immoveables == null){
+            return 0f;
+        }
         for(T o : immoveables){
             cubatureSum += o.calculateCubature();
         }
@@ -113,6 +119,9 @@ public class Composite<T extends Immovable> extends Immovable{
      */
     public float calculateLighting(){
         float lighting = 0f;
+        if(immoveables == null){
+            return 0f;
+        }
         for(T o : immoveables){
             lighting += o.calculateLighting();
         }
@@ -127,6 +136,9 @@ public class Composite<T extends Immovable> extends Immovable{
      */
     public float calculateHeating(){
         float heating = 0f;
+        if(immoveables == null){
+            return 0f;
+        }
         for(T o : immoveables){
             heating += o.calculateHeating();
         }

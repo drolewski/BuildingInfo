@@ -5,9 +5,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * The type Immovable rest exception handler.
+ */
 @ControllerAdvice
 public class ImmovableRestExceptionHandler {
 
+    /**
+     * Handler exception response entity.
+     *
+     * @param exc the exc
+     * @return the response entity
+     */
     @ExceptionHandler
     public ResponseEntity<ImmovableErrorResponse> handlerException(ImmovableNotFound exc){
         ImmovableErrorResponse errorResponse = new ImmovableErrorResponse();
@@ -19,6 +28,12 @@ public class ImmovableRestExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Handle exception response entity.
+     *
+     * @param exc the exc
+     * @return the response entity
+     */
     @ExceptionHandler
     public ResponseEntity<ImmovableErrorResponse> handleException(Exception exc){
         ImmovableErrorResponse errorResponse = new ImmovableErrorResponse();
