@@ -3,8 +3,10 @@
   <mat-card-title>
       Edit Buildings
   </mat-card-title>
-  <mat-accordion>
-    <app-building-editor [building]="b" *ngFor="let b of buildings"></app-building-editor>
-    <app-building-editor></app-building-editor>
-  </mat-accordion>
+  <mat-card-content>
+    <mat-accordion>
+      <app-building-editor [building]="b" *ngFor="let b of buildings"></app-building-editor>
+      <app-building-editor></app-building-editor>
+    </mat-accordion>
+  </mat-card-content>
 </mat-card>

@@ -1,9 +1,9 @@
-<mat-expansion-panel class=panel>
+<mat-expansion-panel *ngIf="data$ | async as data" [ngClass]="shouldBeMarked(data) ? 'mark': 'panel'">
   <mat-expansion-panel-header>
     {{room.name}}
   </mat-expansion-panel-header>
 
-  <table mat-table [dataSource]="data" class=table>
+  <table mat-table [dataSource]="data" [ngClass]="shouldBeMarked(data) ? 'mark': 'panel'" class=table>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -13,7 +13,7 @@
       <!-- Value Column -->
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef> Value </th>
-        <td mat-cell *matCellDef="let element"> {{element.value | async}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
